@@ -1,4 +1,4 @@
-package educalivros.spring.api.ValueObjects;
+package educalivros.spring.api.ValueObjects.V1;
 
 import java.io.Serializable;
 

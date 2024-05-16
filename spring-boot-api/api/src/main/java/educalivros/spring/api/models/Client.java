@@ -2,15 +2,35 @@ package educalivros.spring.api.models;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "cliente")
 public class Client implements Serializable{
 
     //private static final Long serialVersionUID = 1L;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_cliente;
+
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false)
     private String sobrenome;
+
+    @Column(nullable = false)
     private String telefone;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String cpf;
 
     public Long getId_cliente() {
