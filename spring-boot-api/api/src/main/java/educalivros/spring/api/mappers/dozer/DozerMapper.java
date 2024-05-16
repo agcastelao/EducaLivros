@@ -1,4 +1,4 @@
-package educalivros.spring.api.mappers;
+package educalivros.spring.api.mappers.dozer;
 
 import java.util.ArrayList;
 import java.util.List;

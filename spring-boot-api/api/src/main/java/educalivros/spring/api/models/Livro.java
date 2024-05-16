@@ -63,7 +63,7 @@ public class Livro implements Serializable{
         result = prime * result + ((data_publicacao == null) ? 0 : data_publicacao.hashCode());
         return result;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

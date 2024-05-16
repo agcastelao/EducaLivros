@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import educalivros.spring.api.ValueObjects.V1.ClientVO;
 import educalivros.spring.api.services.ClientService;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -26,19 +29,31 @@ public class TestController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ClientVO> findAll() {
 
-        return service.findAll();
+        return service.findAllClients();
     }
 
     @GetMapping(value = "/{client}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ClientVO findById(@PathVariable(value = "client") Long id) {
 
-        return service.findById(id);
+        return service.findByIdClient(id);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ClientVO create(@RequestBody ClientVO client) {
+    public ClientVO createClient(@RequestBody ClientVO client) {
         
-        return service.create(client);
+        return service.createClient(client);
     }
+
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+    public ClientVO updateClient(@RequestBody ClientVO client) {
+
+        return service.updateCLient(client);
+    }
+    
+    @DeleteMapping(value = "/{id}")
+    public void deleteClient(@PathVariable(value = "id") Long id){
+
+    }
+
     
 }
