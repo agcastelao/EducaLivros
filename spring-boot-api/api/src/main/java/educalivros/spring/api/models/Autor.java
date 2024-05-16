@@ -2,12 +2,27 @@ package educalivros.spring.api.models;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "autor")
 public class Autor implements Serializable{
 
     //private static final Long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_autor;
+
+    @Column(nullable = false)
     private String nome_autor;
+
+    @Column(nullable = false)
     private String sobrenome_autor;
     
     public Long getId_autor() {
@@ -28,7 +43,7 @@ public class Autor implements Serializable{
     public void setSobrenome_autor(String sobrenome_autor) {
         this.sobrenome_autor = sobrenome_autor;
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;

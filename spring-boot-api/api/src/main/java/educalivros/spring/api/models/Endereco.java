@@ -2,22 +2,34 @@ package educalivros.spring.api.models;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "endereco")
 public class Endereco implements Serializable{
     
     //public static final Long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_endereco;
 
-    private String id_endereco;
+    @Column(nullable = false)
     private String codigo_postal;
+
+    @Column(nullable = false)
     private String estado;
+
+    @Column(nullable = false)
     private String rua_nome;
+
+    @Column(nullable = false)
     private String rua_complemento;
 
-    public String getId_endereco() {
-        return id_endereco;
-    }
-    public void setId_endereco(String id_endereco) {
-        this.id_endereco = id_endereco;
-    }
     public String getCodigo_postal() {
         return codigo_postal;
     }
@@ -42,7 +54,12 @@ public class Endereco implements Serializable{
     public void setRua_complemento(String rua_complemento) {
         this.rua_complemento = rua_complemento;
     }
-
+    public Long getId_endereco() {
+        return id_endereco;
+    }
+    public void setId_endereco(Long id_endereco) {
+        this.id_endereco = id_endereco;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -54,7 +71,6 @@ public class Endereco implements Serializable{
         result = prime * result + ((rua_complemento == null) ? 0 : rua_complemento.hashCode());
         return result;
     }
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -93,8 +109,5 @@ public class Endereco implements Serializable{
     }
 
     
-
-    
-
 
 }

@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "cliente")
 public class Client implements Serializable{
 
-    //private static final Long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_cliente;
@@ -125,6 +125,5 @@ public class Client implements Serializable{
         return true;
     }
 
-    
     
 }

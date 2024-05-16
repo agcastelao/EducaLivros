@@ -2,14 +2,32 @@ package educalivros.spring.api.models;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "papelaria")
 public class Papelaria implements Serializable{
 
     //private static final Long serialVersionUID = 1L;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_papelaria;
+
+    @Column(nullable = false)
     private String tipo;
+
+    @Column(nullable = false)
     private String marca;
+
+    @Column(nullable = false)
     private String nome_produto;
+
+    @Column(nullable = false)
     private int estoque_papelaria;
 
     public Long getId_papelaria() {
@@ -42,7 +60,7 @@ public class Papelaria implements Serializable{
     public void setEstoque_papelaria(int estoque_papelaria) {
         this.estoque_papelaria = estoque_papelaria;
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;

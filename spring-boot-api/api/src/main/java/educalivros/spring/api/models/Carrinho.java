@@ -2,11 +2,22 @@ package educalivros.spring.api.models;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "carrinho")
 public class Carrinho implements Serializable{
 
     //private static final Long serialVersionUID = 1L;
-
+    @Id
+    @GeneratedValue
     private Long id_carrinho;
+
+    @Column(nullable = false)
     private int quantidade_produto;
 
     public Long getId_carrinho() {

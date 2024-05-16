@@ -3,15 +3,35 @@ package educalivros.spring.api.models;
 import java.io.Serializable;
 import java.util.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "livro")
 public class Livro implements Serializable{
 
     //private static final Long serialVersionUID = 1L;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_livro;
+
+    @Column(nullable = false)
     private String descricao_livro;
+
+    @Column(nullable = false)
     private String estoque_produto;
+
+    @Column(nullable = false)
     private String nome_livro;
+
+    @Column(nullable = false)
     private String avaliacao;
+
+    @Column(nullable = false)
     private Date data_publicacao;
 
     public Long getId_livro() {

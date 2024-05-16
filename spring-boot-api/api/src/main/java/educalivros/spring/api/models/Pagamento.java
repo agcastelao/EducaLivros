@@ -3,12 +3,30 @@ package educalivros.spring.api.models;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "pagamento")
 public class Pagamento implements Serializable{
 
     //public static final Long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_pedido;
+
+    @Column(nullable = false)
     private String forma_pagamento;
+
+    @Column(nullable = false)
     private LocalDate data_pagamento;
+
+    @Column(nullable = false)
     private boolean pagamento_valido;
     
     public Long getId_pedido() {
