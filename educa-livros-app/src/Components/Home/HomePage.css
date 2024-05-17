@@ -1,0 +1,22 @@
+.home-background {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../imgs/imagem\ biblioteca.jpg');
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
+}
+
+.bg-color1 {
+  background-color: #f95959;
+}
+
+.color-1 {
+  color: #f95959;
+}
+
+.bg-color2 {
+  background-color: #e7eaf6;
+}
+
+.color-2 {
+  color: #e7eaf6;
+}

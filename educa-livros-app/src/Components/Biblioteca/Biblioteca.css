@@ -1,28 +1,59 @@
 .biblioteca {
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  
-  .livro {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .livro img {
-    width: 100px;
-    margin-right: 20px;
-  }
-  
-  .livro h2 {
-    margin: 0;
-  }
-  
-  .livro p {
-    font-size: 0.9rem;
-    color: #666;
-  }
-  
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.estiloTITULO {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-align: center;
+  color: white;
+  background-color: #212529;
+  margin-top: 30px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.livro {
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: left;
+}
+
+.livro img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.livro p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.livro button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 5px 10px;
+  background-color: #f95959;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.livro button:hover {
+  background-color: rgba(249, 89, 89, 0.8);
+}

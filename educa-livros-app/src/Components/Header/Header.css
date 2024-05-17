@@ -1,0 +1,28 @@
+.navbar-do-header {
+    height: 60px;
+    background-color: black;
+  }
+  
+  .navbar-do-header .container-do-header {
+    height: 100%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  
+  .container-do-header ul {
+    justify-content: center;
+    width: 50%;
+    align-items: center;
+    gap: 25px;
+  }
+  
+  .container-do-header ul li {
+    font-size: 15px;
+    list-style-type: none;
+  }
+  
+  .container-do-header ul li a {
+    text-decoration: none;
+    color: #e7eaf6;
+  }
+  

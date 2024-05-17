@@ -1,25 +1,11 @@
-.informacoes {
-    background-color: #f4f4f4;
-    padding: 20px;
-    color: #333;
-  }
-  
-  .informacoes h2, .informacoes h3 {
-    color: #212529;
-  }
-  
-  .informacoes p {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 15px;
-  }
-  
-  .informacoes ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .informacoes li {
-    margin-bottom: 10px;
-  }
-  
+.bg-color2 {
+  background-color: #e7eaf6;
+}
+
+.color-2 {
+  color: #e7eaf6;
+}
+
+.color-3 {
+  color: black;
+}
