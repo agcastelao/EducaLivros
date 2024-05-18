@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import educalivros.spring.api.ValueObjects.V1.ClientVO;
 import educalivros.spring.api.ValueObjects.V2.ClientVO2;
 import educalivros.spring.api.exceptions.ResourceNotFoundException;
-import educalivros.spring.api.mappers.Custom.ClientMapper;
+import educalivros.spring.api.mappers.custom.ClientMapper;
 import educalivros.spring.api.mappers.dozer.DozerMapper;
 import educalivros.spring.api.models.Client;
 import educalivros.spring.api.repositories.ClientRepository;

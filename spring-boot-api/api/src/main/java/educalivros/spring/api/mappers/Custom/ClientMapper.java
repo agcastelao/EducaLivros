@@ -1,4 +1,4 @@
-package educalivros.spring.api.mappers.Custom;
+package educalivros.spring.api.mappers.custom;
 
 //import org.hibernate.mapping.List;
 import org.springframework.stereotype.Service;
