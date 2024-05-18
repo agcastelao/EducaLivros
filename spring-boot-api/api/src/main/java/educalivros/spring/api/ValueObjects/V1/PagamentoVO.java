@@ -1,33 +1,15 @@
-package educalivros.spring.api.models;
+package educalivros.spring.api.ValueObjects.V1;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+public class PagamentoVO implements Serializable{
 
-@Entity
-@Table(name = "pagamento")
-public class Pagamento implements Serializable{
-
-    //public static final Long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_pedido;
-
-    @Column(nullable = false)
     private String forma_pagamento;
-
-    @Column(nullable = false)
     private LocalDate data_pagamento;
-
-    @Column(nullable = false)
     private boolean pagamento_valido;
-    
+
 
     public String getForma_pagamento() {
         return forma_pagamento;
@@ -35,19 +17,17 @@ public class Pagamento implements Serializable{
     public void setForma_pagamento(String forma_pagamento) {
         this.forma_pagamento = forma_pagamento;
     }
-
-    public boolean isPagamento_valido() {
-        return pagamento_valido;
-    }
-    public void setPagamento_valido(boolean pagamento_valido) {
-        this.pagamento_valido = pagamento_valido;
-    }
-
     public LocalDate getData_pagamento() {
         return data_pagamento;
     }
     public void setData_pagamento(LocalDate data_pagamento) {
         this.data_pagamento = data_pagamento;
+    }
+    public boolean isPagamento_valido() {
+        return pagamento_valido;
+    }
+    public void setPagamento_valido(boolean pagamento_valido) {
+        this.pagamento_valido = pagamento_valido;
     }
     public Long getId_pedido() {
         return id_pedido;
@@ -73,7 +53,7 @@ public class Pagamento implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Pagamento other = (Pagamento) obj;
+        PagamentoVO other = (PagamentoVO) obj;
         if (id_pedido == null) {
             if (other.id_pedido != null)
                 return false;
@@ -93,7 +73,6 @@ public class Pagamento implements Serializable{
             return false;
         return true;
     }
-    
 
-    
+
 }

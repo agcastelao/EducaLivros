@@ -13,7 +13,6 @@ import jakarta.persistence.Table;
 @Table(name = "cliente")
 public class Client implements Serializable{
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_cliente;

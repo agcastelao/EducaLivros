@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import educalivros.spring.api.ValueObjects.V1.ClientVO;
+import educalivros.spring.api.ValueObjects.V2.ClientVO2;
 import educalivros.spring.api.services.ClientService;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -27,13 +28,13 @@ public class TestController {
     private ClientService service;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ClientVO> findAll() {
+    public List<ClientVO2> findAll() {
 
         return service.findAllClients();
     }
 
     @GetMapping(value = "/{client}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ClientVO findById(@PathVariable(value = "client") Long id) {
+    public ClientVO2 findById(@PathVariable(value = "client") Long id) {
 
         return service.findByIdClient(id);
     }
@@ -44,7 +45,7 @@ public class TestController {
         return service.createClient(client);
     }
 
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ClientVO updateClient(@RequestBody ClientVO client) {
 
         return service.updateCLient(client);
@@ -52,8 +53,9 @@ public class TestController {
     
     @DeleteMapping(value = "/{id}")
     public void deleteClient(@PathVariable(value = "id") Long id){
-
-    }
+        
+        service.deleteClient(id);
+    }   
 
     
 }
