@@ -17,7 +17,7 @@ public class Pagamento implements Serializable{
     //public static final Long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_pedido;
+    private Long id_pagamento;
 
     @Column(nullable = false)
     private String forma_pagamento;
@@ -49,17 +49,17 @@ public class Pagamento implements Serializable{
     public void setData_pagamento(LocalDate data_pagamento) {
         this.data_pagamento = data_pagamento;
     }
-    public Long getId_pedido() {
-        return id_pedido;
+    public Long getId_pagamento() {
+        return id_pagamento;
     }
-    public void setId_pedido(Long id_pedido) {
-        this.id_pedido = id_pedido;
+    public void setId_pagamento(Long id_pagamento) {
+        this.id_pagamento = id_pagamento;
     }
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id_pedido == null) ? 0 : id_pedido.hashCode());
+        result = prime * result + ((id_pagamento == null) ? 0 : id_pagamento.hashCode());
         result = prime * result + ((forma_pagamento == null) ? 0 : forma_pagamento.hashCode());
         result = prime * result + ((data_pagamento == null) ? 0 : data_pagamento.hashCode());
         result = prime * result + (pagamento_valido ? 1231 : 1237);
@@ -74,10 +74,10 @@ public class Pagamento implements Serializable{
         if (getClass() != obj.getClass())
             return false;
         Pagamento other = (Pagamento) obj;
-        if (id_pedido == null) {
-            if (other.id_pedido != null)
+        if (id_pagamento == null) {
+            if (other.id_pagamento != null)
                 return false;
-        } else if (!id_pedido.equals(other.id_pedido))
+        } else if (!id_pagamento.equals(other.id_pagamento))
             return false;
         if (forma_pagamento == null) {
             if (other.forma_pagamento != null)

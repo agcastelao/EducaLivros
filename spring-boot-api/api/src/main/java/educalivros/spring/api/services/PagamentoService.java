@@ -54,7 +54,7 @@ public class PagamentoService implements Serializable{
     public PagamentoVO updatePagamento(PagamentoVO pagamento) {
 
         logger.info("Updating one Pagamento");
-        var entity = repository.findById(pagamento.getId_pedido())
+        var entity = repository.findById(pagamento.getId_pagamento())
                 .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID"));
 
         entity.setData_pagamento(pagamento.getData_pagamento());
