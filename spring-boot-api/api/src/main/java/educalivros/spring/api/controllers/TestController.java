@@ -39,6 +39,7 @@ public class TestController {
         return service.findByIdClient(id);
     }
 
+    
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ClientVO createClient(@RequestBody ClientVO client) {
         
