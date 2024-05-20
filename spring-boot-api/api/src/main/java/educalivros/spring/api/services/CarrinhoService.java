@@ -1,6 +1,5 @@
 package educalivros.spring.api.services;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -14,7 +13,7 @@ import educalivros.spring.api.models.Carrinho;
 import educalivros.spring.api.repositories.CarrinhoRepository;
 
 @Service
-public class CarrinhoService implements Serializable {
+public class CarrinhoService {
 
     private Logger logger = Logger.getLogger(CarrinhoRepository.class.getName());
 

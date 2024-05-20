@@ -1,6 +1,5 @@
 package educalivros.spring.api.services;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -13,7 +12,7 @@ import educalivros.spring.api.models.Pagamento;
 import educalivros.spring.api.repositories.PagamentoRepository;
 
 
-public class PagamentoService implements Serializable{
+public class PagamentoService {
 
     private Logger logger = Logger.getLogger(PagamentoRepository.class.getName());
 

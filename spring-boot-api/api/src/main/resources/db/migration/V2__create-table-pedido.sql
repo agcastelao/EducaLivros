@@ -11,7 +11,7 @@ CREATE SEQUENCE public.pedido_id_pedido_seq
     NO MAXVALUE
     CACHE 1;
 
-ALTER SEQUENCE public.pedido_id_pedido_seq OWNED BY public.pedido_id_pedido
+ALTER SEQUENCE public.pedido_id_pedido_seq OWNED BY public.pedido.id_pedido;
 
 ALTER TABLE ONLY public.pedido ALTER COLUMN id_pedido SET DEFAULT nextval('public.pedido_id_pedido_seq'::regclass);
 

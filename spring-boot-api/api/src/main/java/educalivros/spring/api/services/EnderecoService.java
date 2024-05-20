@@ -1,6 +1,5 @@
 package educalivros.spring.api.services;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -14,7 +13,7 @@ import educalivros.spring.api.mappers.dozer.DozerMapper;
 import educalivros.spring.api.models.Endereco;
 
 @Service
-public class EnderecoService implements Serializable{
+public class EnderecoService{
 
     private Logger logger = Logger.getLogger(EnderecoRepository.class.getName());
 

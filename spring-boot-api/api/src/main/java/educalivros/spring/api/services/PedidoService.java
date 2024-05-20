@@ -1,20 +1,19 @@
 package educalivros.spring.api.services;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import educalivros.spring.api.ValueObjects.V1.PedidoVO;
 import educalivros.spring.api.exceptions.ResourceNotFoundException;
 import educalivros.spring.api.mappers.dozer.DozerMapper;
 import educalivros.spring.api.models.Pedido;
 import educalivros.spring.api.repositories.PedidoRepository;
-import jakarta.persistence.Entity;
 
-@Entity
-public class PedidoService implements Serializable{
+@Service
+public class PedidoService{
 
     private Logger logger = Logger.getLogger(PedidoService.class.getName());
 
