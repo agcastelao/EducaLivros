@@ -33,8 +33,8 @@ public class TestController {
         return service.findAllClients();
     }
 
-    @GetMapping(value = "/{client}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ClientVO2 findById(@PathVariable(value = "client") Long id) {
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ClientVO2 findById(@PathVariable(value = "id") Long id) {
 
         return service.findByIdClient(id);
     }
