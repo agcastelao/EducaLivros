@@ -1,12 +1,14 @@
 package educalivros.spring.api.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,7 +16,7 @@ import jakarta.persistence.Table;
 public class Autor implements Serializable{
 
     //private static final Long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_autor;
@@ -25,6 +27,9 @@ public class Autor implements Serializable{
     @Column(nullable = false)
     private String sobrenome_autor;
     
+    @ManyToMany(mappedBy = "autors")
+    private List<Livro> livros;
+
     public Long getId_autor() {
         return id_autor;
     }
@@ -43,7 +48,12 @@ public class Autor implements Serializable{
     public void setSobrenome_autor(String sobrenome_autor) {
         this.sobrenome_autor = sobrenome_autor;
     }
-
+    public List<Livro> getLivros() {
+        return livros;
+    }
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -51,6 +61,7 @@ public class Autor implements Serializable{
         result = prime * result + ((id_autor == null) ? 0 : id_autor.hashCode());
         result = prime * result + ((nome_autor == null) ? 0 : nome_autor.hashCode());
         result = prime * result + ((sobrenome_autor == null) ? 0 : sobrenome_autor.hashCode());
+        result = prime * result + ((livros == null) ? 0 : livros.hashCode());
         return result;
     }
     @Override
@@ -77,9 +88,13 @@ public class Autor implements Serializable{
                 return false;
         } else if (!sobrenome_autor.equals(other.sobrenome_autor))
             return false;
+        if (livros == null) {
+            if (other.livros != null)
+                return false;
+        } else if (!livros.equals(other.livros))
+            return false;
         return true;
     }
 
-    
-
+  
 }

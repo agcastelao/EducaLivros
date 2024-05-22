@@ -3,11 +3,16 @@ package educalivros.spring.api.models;
 import java.io.Serializable;
 import java.util.Date;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,6 +38,15 @@ public class Livro implements Serializable{
 
     @Column(nullable = false)
     private Date data_publicacao;
+
+    @ManyToMany(mappedBy = "livros")
+    private List<Carrinho> carrinhos;
+
+    @ManyToMany
+    @JoinTable(name = "livro_autor",
+                joinColumns = @JoinColumn(name = "id_livro_fk"),
+                inverseJoinColumns = @JoinColumn(name = "id_autor_fk"))
+    private List<Autor> autors;
 
     public Long getId_livro() {
         return id_livro;
@@ -70,7 +84,18 @@ public class Livro implements Serializable{
     public void setData_publicacao(Date data_publicacao) {
         this.data_publicacao = data_publicacao;
     }
-
+    public List<Carrinho> getCarrinhos() {
+        return carrinhos;
+    }
+    public void setCarrinhos(List<Carrinho> carrinhos) {
+        this.carrinhos = carrinhos;
+    }
+    public List<Autor> getAutors() {
+        return autors;
+    }
+    public void setAutors(List<Autor> autors) {
+        this.autors = autors;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -81,9 +106,10 @@ public class Livro implements Serializable{
         result = prime * result + ((nome_livro == null) ? 0 : nome_livro.hashCode());
         result = prime * result + ((avaliacao == null) ? 0 : avaliacao.hashCode());
         result = prime * result + ((data_publicacao == null) ? 0 : data_publicacao.hashCode());
+        result = prime * result + ((carrinhos == null) ? 0 : carrinhos.hashCode());
+        result = prime * result + ((autors == null) ? 0 : autors.hashCode());
         return result;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -123,10 +149,17 @@ public class Livro implements Serializable{
                 return false;
         } else if (!data_publicacao.equals(other.data_publicacao))
             return false;
+        if (carrinhos == null) {
+            if (other.carrinhos != null)
+                return false;
+        } else if (!carrinhos.equals(other.carrinhos))
+            return false;
+        if (autors == null) {
+            if (other.autors != null)
+                return false;
+        } else if (!autors.equals(other.autors))
+            return false;
         return true;
     }
     
-    
-    
-
 }

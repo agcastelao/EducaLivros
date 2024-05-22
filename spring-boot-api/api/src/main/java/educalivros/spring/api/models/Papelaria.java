@@ -1,12 +1,14 @@
 package educalivros.spring.api.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,6 +31,9 @@ public class Papelaria implements Serializable{
 
     @Column(nullable = false)
     private int estoque_papelaria;
+
+    @ManyToMany(mappedBy = "papelarias")
+    private List<Carrinho> carrinhos;
 
     public Long getId_papelaria() {
         return id_papelaria;
@@ -60,52 +65,11 @@ public class Papelaria implements Serializable{
     public void setEstoque_papelaria(int estoque_papelaria) {
         this.estoque_papelaria = estoque_papelaria;
     }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id_papelaria == null) ? 0 : id_papelaria.hashCode());
-        result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
-        result = prime * result + ((marca == null) ? 0 : marca.hashCode());
-        result = prime * result + ((nome_produto == null) ? 0 : nome_produto.hashCode());
-        result = prime * result + estoque_papelaria;
-        return result;
+    public List<Carrinho> getCarrinho() {
+        return carrinhos;
     }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Papelaria other = (Papelaria) obj;
-        if (id_papelaria == null) {
-            if (other.id_papelaria != null)
-                return false;
-        } else if (!id_papelaria.equals(other.id_papelaria))
-            return false;
-        if (tipo == null) {
-            if (other.tipo != null)
-                return false;
-        } else if (!tipo.equals(other.tipo))
-            return false;
-        if (marca == null) {
-            if (other.marca != null)
-                return false;
-        } else if (!marca.equals(other.marca))
-            return false;
-        if (nome_produto == null) {
-            if (other.nome_produto != null)
-                return false;
-        } else if (!nome_produto.equals(other.nome_produto))
-            return false;
-        if (estoque_papelaria != other.estoque_papelaria)
-            return false;
-        return true;
+    public void setCarrinho(List<Carrinho> carrinhos) {
+        this.carrinhos = carrinhos;
     }
 
-    
-    
 }

@@ -2,12 +2,16 @@ package educalivros.spring.api.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,6 +28,12 @@ public class Pedido implements Serializable{
     @Column
     private LocalDate data_pedido;
 
+    @OneToMany(mappedBy = "pedido")
+    private List<Pagamento> pagamentos;
+
+    @ManyToOne
+    @JoinColumn(name = "id_carrinho")
+    private Carrinho carrinho;
 
     public float getValor_total() {
         return valor_total;
@@ -43,6 +53,18 @@ public class Pedido implements Serializable{
     public void setId_pedido(Long id_pedido) {
         this.id_pedido = id_pedido;
     }
+    public List<Pagamento> getPagamentos() {
+        return pagamentos;
+    }
+    public void setPagamentos(List<Pagamento> pagamento) {
+        this.pagamentos = pagamento;
+    }
+    public Carrinho getCarrinho() {
+        return carrinho;
+    }
+    public void setCarrinho(Carrinho carrinho) {
+        this.carrinho = carrinho;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -50,6 +72,8 @@ public class Pedido implements Serializable{
         result = prime * result + ((id_pedido == null) ? 0 : id_pedido.hashCode());
         result = prime * result + Float.floatToIntBits(valor_total);
         result = prime * result + ((data_pedido == null) ? 0 : data_pedido.hashCode());
+        result = prime * result + ((pagamentos == null) ? 0 : pagamentos.hashCode());
+        result = prime * result + ((carrinho == null) ? 0 : carrinho.hashCode());
         return result;
     }
     @Override
@@ -73,8 +97,17 @@ public class Pedido implements Serializable{
                 return false;
         } else if (!data_pedido.equals(other.data_pedido))
             return false;
+        if (pagamentos == null) {
+            if (other.pagamentos != null)
+                return false;
+        } else if (!pagamentos.equals(other.pagamentos))
+            return false;
+        if (carrinho == null) {
+            if (other.carrinho != null)
+                return false;
+        } else if (!carrinho.equals(other.carrinho))
+            return false;
         return true;
     }
-    
-
+  
 }

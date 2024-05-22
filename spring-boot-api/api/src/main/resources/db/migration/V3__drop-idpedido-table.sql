@@ -1,0 +1,1 @@
+ALTER TABLE public.pagamento DROP COLUMN id_pedido;
