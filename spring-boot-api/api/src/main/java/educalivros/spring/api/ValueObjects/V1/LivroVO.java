@@ -2,6 +2,10 @@ package educalivros.spring.api.ValueObjects.V1;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import educalivros.spring.api.models.Autor;
+import educalivros.spring.api.models.Carrinho;
 
 public class LivroVO implements Serializable {
 
@@ -11,6 +15,8 @@ public class LivroVO implements Serializable {
     private String nome_livro;
     private String avaliacao;
     private Date data_publicacao;
+    private List<Carrinho> carrinhos;
+    private List<Autor> autors;
     
     public Long getId_livro() {
         return id_livro;
@@ -48,6 +54,18 @@ public class LivroVO implements Serializable {
     public void setData_publicacao(Date data_publicacao) {
         this.data_publicacao = data_publicacao;
     }
+    public List<Carrinho> getCarrinhos() {
+        return carrinhos;
+    }
+    public void setCarrinhos(List<Carrinho> carrinhos) {
+        this.carrinhos = carrinhos;
+    }
+    public List<Autor> getAutors() {
+        return autors;
+    }
+    public void setAutors(List<Autor> autors) {
+        this.autors = autors;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -58,6 +76,8 @@ public class LivroVO implements Serializable {
         result = prime * result + ((nome_livro == null) ? 0 : nome_livro.hashCode());
         result = prime * result + ((avaliacao == null) ? 0 : avaliacao.hashCode());
         result = prime * result + ((data_publicacao == null) ? 0 : data_publicacao.hashCode());
+        result = prime * result + ((carrinhos == null) ? 0 : carrinhos.hashCode());
+        result = prime * result + ((autors == null) ? 0 : autors.hashCode());
         return result;
     }
     @Override
@@ -99,8 +119,17 @@ public class LivroVO implements Serializable {
                 return false;
         } else if (!data_publicacao.equals(other.data_publicacao))
             return false;
+        if (carrinhos == null) {
+            if (other.carrinhos != null)
+                return false;
+        } else if (!carrinhos.equals(other.carrinhos))
+            return false;
+        if (autors == null) {
+            if (other.autors != null)
+                return false;
+        } else if (!autors.equals(other.autors))
+            return false;
         return true;
     }
-
-    
+        
 }

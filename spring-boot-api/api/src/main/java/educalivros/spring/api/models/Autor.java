@@ -3,6 +3,8 @@ package educalivros.spring.api.models;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class Autor implements Serializable{
     @Column(nullable = false)
     private String sobrenome_autor;
     
+    @JsonBackReference
     @ManyToMany(mappedBy = "autors")
     private List<Livro> livros;
 

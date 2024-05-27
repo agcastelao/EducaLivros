@@ -3,12 +3,15 @@ package educalivros.spring.api.ValueObjects.V1;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import educalivros.spring.api.models.Pedido;
+
 public class PagamentoVO implements Serializable{
 
     private Long id_pagamento;
     private String forma_pagamento;
     private LocalDate data_pagamento;
     private boolean pagamento_valido;
+    private Pedido pedido;
 
 
     public String getForma_pagamento() {
@@ -35,6 +38,12 @@ public class PagamentoVO implements Serializable{
     public void setId_pagamento(Long id_pagamento) {
         this.id_pagamento = id_pagamento;
     }
+    public Pedido getPedido() {
+        return pedido;
+    }
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -43,6 +52,7 @@ public class PagamentoVO implements Serializable{
         result = prime * result + ((forma_pagamento == null) ? 0 : forma_pagamento.hashCode());
         result = prime * result + ((data_pagamento == null) ? 0 : data_pagamento.hashCode());
         result = prime * result + (pagamento_valido ? 1231 : 1237);
+        result = prime * result + ((pedido == null) ? 0 : pedido.hashCode());
         return result;
     }
     @Override
@@ -71,9 +81,13 @@ public class PagamentoVO implements Serializable{
             return false;
         if (pagamento_valido != other.pagamento_valido)
             return false;
+        if (pedido == null) {
+            if (other.pedido != null)
+                return false;
+        } else if (!pedido.equals(other.pedido))
+            return false;
         return true;
     }
  
-
 
 }

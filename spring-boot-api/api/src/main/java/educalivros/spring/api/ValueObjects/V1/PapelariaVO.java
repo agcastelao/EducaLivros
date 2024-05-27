@@ -1,6 +1,9 @@
 package educalivros.spring.api.ValueObjects.V1;
 
 import java.io.Serializable;
+import java.util.List;
+
+import educalivros.spring.api.models.Carrinho;
 
 public class PapelariaVO implements Serializable{
 
@@ -9,6 +12,7 @@ public class PapelariaVO implements Serializable{
     private String marca;
     private String nome_produto;
     private int estoque_papelaria;
+    private List<Carrinho> carrinhos;
 
     public Long getId_papelaria() {
         return id_papelaria;
@@ -40,7 +44,12 @@ public class PapelariaVO implements Serializable{
     public void setEstoque_papelaria(int estoque_papelaria) {
         this.estoque_papelaria = estoque_papelaria;
     }
-
+    public List<Carrinho> getCarrinhos() {
+        return carrinhos;
+    }
+    public void setCarrinhos(List<Carrinho> carrinhos) {
+        this.carrinhos = carrinhos;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -50,6 +59,7 @@ public class PapelariaVO implements Serializable{
         result = prime * result + ((marca == null) ? 0 : marca.hashCode());
         result = prime * result + ((nome_produto == null) ? 0 : nome_produto.hashCode());
         result = prime * result + estoque_papelaria;
+        result = prime * result + ((carrinhos == null) ? 0 : carrinhos.hashCode());
         return result;
     }
     @Override
@@ -83,9 +93,13 @@ public class PapelariaVO implements Serializable{
             return false;
         if (estoque_papelaria != other.estoque_papelaria)
             return false;
+        if (carrinhos == null) {
+            if (other.carrinhos != null)
+                return false;
+        } else if (!carrinhos.equals(other.carrinhos))
+            return false;
         return true;
     }
-
     
 
 }

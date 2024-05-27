@@ -5,6 +5,10 @@ import java.util.Date;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+// import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,12 +44,15 @@ public class Livro implements Serializable{
     private Date data_publicacao;
 
     @ManyToMany(mappedBy = "livros")
+    @JsonIgnoreProperties("carrinhos") // Ajuste conforme necessário para evitar a recursividade
     private List<Carrinho> carrinhos;
 
+    // @JsonManagedReference
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "livro_autor",
-                joinColumns = @JoinColumn(name = "id_livro_fk"),
-                inverseJoinColumns = @JoinColumn(name = "id_autor_fk"))
+                joinColumns = @JoinColumn(name = "id_livro_fk", nullable = false),
+                inverseJoinColumns = @JoinColumn(name = "id_autor_fk", nullable = false))
     private List<Autor> autors;
 
     public Long getId_livro() {

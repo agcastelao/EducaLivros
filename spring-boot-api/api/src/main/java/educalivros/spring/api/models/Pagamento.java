@@ -31,7 +31,7 @@ public class Pagamento implements Serializable{
     private boolean pagamento_valido;
 
     @ManyToOne
-    @JoinColumn(name = "id_pedido")
+    @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
 
     public String getForma_pagamento() {

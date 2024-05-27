@@ -32,7 +32,7 @@ public class Pedido implements Serializable{
     private List<Pagamento> pagamentos;
 
     @ManyToOne
-    @JoinColumn(name = "id_carrinho")
+    @JoinColumn(name = "id_carrinho", nullable = false)
     private Carrinho carrinho;
 
     public float getValor_total() {
