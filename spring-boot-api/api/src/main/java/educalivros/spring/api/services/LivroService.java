@@ -58,6 +58,7 @@ public class LivroService {
                 if (autor.getId_autor() == null) {
                     autorRepository.save(autor);
                 }
+                // findByIdLivro(livro.getId_livro()) 
                 autors.add(autor);
             }
 
@@ -73,17 +74,32 @@ public class LivroService {
     public LivroVO updateLivro(LivroVO livro) {
 
         logger.info("Updating one Livro");
-        var entity = livroRepository.findById(livro.getId_livro())
-                .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID"));
+        if (livro.getAutors() != null && !livro.getAutors().isEmpty()) {
 
-        entity.setAvaliacao(livro.getAvaliacao());
-        entity.setData_publicacao(livro.getData_publicacao());
-        entity.setDescricao_livro(livro.getDescricao_livro());
-        entity.setEstoque_produto(livro.getEstoque_produto());
-        entity.setNome_livro(livro.getNome_livro());
+            List<Autor> autors = new ArrayList<>();
+            for (Autor autor : livro.getAutors()) {
 
-        var VO = DozerMapper.parseObjects(livroRepository.save(entity), LivroVO.class);
-        return VO;
+                var entity1 = autorRepository.findById(autor.getId_autor()) 
+                            .orElseThrow(() -> new ResourceNotFoundException("id nao encontrado"));
+
+                autors.add(entity1);
+            }
+            
+            var livroFinded = livroRepository.findById(livro.getId_livro()) 
+                        .orElseThrow(() -> new ResourceNotFoundException("Livro não encontrado"));
+            livroFinded.setAutors(autors);
+            livroFinded.setAvaliacao(livro.getAvaliacao());
+            livroFinded.setCarrinhos(livro.getCarrinhos());
+            livroFinded.setData_publicacao(livro.getData_publicacao());
+            livroFinded.setDescricao_livro(livro.getDescricao_livro());
+            livroFinded.setEstoque_produto(livro.getEstoque_produto());
+            livroFinded.setNome_livro(livro.getNome_livro());
+
+            var VO = DozerMapper.parseObjects(livroRepository.save(livroFinded), LivroVO.class);
+            return VO;
+        }else{
+            throw new ResourceNotFoundException("Erro ao achar os autores");
+        }
     }
 
     public void deleteLivro(Long id) {
@@ -92,6 +108,5 @@ public class LivroService {
         var entity = livroRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID"));
         livroRepository.delete(entity);
-
     }
 }
