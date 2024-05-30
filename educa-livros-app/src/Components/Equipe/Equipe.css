@@ -1,0 +1,46 @@
+.equipe-main {
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+  }
+  
+  .equipe-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #333;
+  }
+  
+  .equipe-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .membro {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+  
+  .membro-img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+  }
+  
+  .membro-nome {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  .membro-funcao {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  

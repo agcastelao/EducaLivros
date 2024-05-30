@@ -6,6 +6,7 @@ import Biblioteca from './Components/Biblioteca/Biblioteca';
 import Ecommerce from './Components/Ecommerce/Ecommerce';
 import HomePage from './Components/Home/HomePage';
 import Informacoes from './Components/Informacoes/Informacoes';
+import Equipe from './Components/Equipe/Equipe';
 import Login from './Components/Login/Login';
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/biblioteca" element={<Biblioteca />} />
           <Route path="/ecommerce" element={<Ecommerce />} />
           <Route path="/informacoes" element={<Informacoes />} />
+          <Route path="/equipe" element={<Equipe />} />
           <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
