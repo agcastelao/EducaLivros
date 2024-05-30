@@ -18,177 +18,70 @@ import livroEstruturaRevolucaoImg from '../imgs/A estrutura da Revolução cient
 import livroComoMenteFuncionaImg from '../imgs/Como a mente funciona-250px.jpg';
 import livroLimitesInterpretacaoImg from '../imgs/os limites da interpretacao -250 px.jpg';
 
+const produtos = [
+  {
+    categoria: 'Fardas Escolares',
+    itens: [
+      { id: 1, nome: 'Camisa escolar', desc: 'Camisas confortáveis para o dia a dia do seu filho.', preco: 'R$40,00', img: camisaEscolarImg },
+      { id: 2, nome: 'Calça Escolar', desc: 'Calças confortáveis para o uso diário escolar.', preco: 'R$40,00', img: calcaEscolarImg },
+      { id: 3, nome: 'Short Escolar', desc: 'Shorts leves e confortáveis para atividades escolares.', preco: 'R$40,00', img: shortEscolarImg }
+    ]
+  },
+  {
+    categoria: 'Livros',
+    itens: [
+      { id: 4, nome: 'ONE PIECE', desc: 'Echiro Oda', preco: 'R$30,00', img: livroOnePieceImg },
+      { id: 5, nome: 'SENHOR DOS ANEIS', desc: 'J.R.R. Tolkien', preco: 'R$45,00', img: livroSenhorAneisImg },
+      { id: 6, nome: 'HARRY POTTER', desc: 'J.K. Rowling', preco: 'R$50,00', img: livroHarryPotterImg },
+      { id: 7, nome: 'PAI RICO PAI POBRE', desc: 'Robert T. Kiyosaki', preco: 'R$35,00', img: livroPaiRicoPaiPobreImg },
+      { id: 8, nome: 'O INVESTIDOR INTELIGENTE', desc: 'Benjamin Graham', preco: 'R$40,00', img: livroInvestidorInteligenteImg },
+      { id: 9, nome: 'AÇÕES COMUNS, LUCROS EXTRAORDINÁRIOS', desc: 'Philip Fisher', preco: 'R$45,00', img: livroAcoesComunsImg },
+      { id: 10, nome: 'A Estrutura das Revoluções Científicas', desc: 'Thomas S. Kuhn', preco: 'R$55,00', img: livroEstruturaRevolucaoImg },
+      { id: 11, nome: 'Como a Mente Funciona', desc: 'Steven Pinker', preco: 'R$60,00', img: livroComoMenteFuncionaImg },
+      { id: 12, nome: 'Os Limites da Interpretação', desc: 'Umberto Eco', preco: 'R$50,00', img: livroLimitesInterpretacaoImg }
+    ]
+  },
+  {
+    categoria: 'Cursos Particulares',
+    itens: [
+      { id: 13, nome: 'Curso de Matemática', desc: 'Melhore suas habilidades matemáticas com nosso curso interativo.', preco: 'R$100,00', img: cursoMatematicaImg },
+      { id: 14, nome: 'Curso de Programação para Iniciantes', desc: 'Introdução à programação com foco prático e didático.', preco: 'R$60,00', img: cursoProgramacaoImg },
+      { id: 15, nome: 'Curso de Física', desc: 'Explore os fundamentos da física com abordagens interativas.', preco: 'R$100,00', img: cursoFisicaImg },
+      { id: 16, nome: 'Curso de Química', desc: 'Aprenda química de forma prática e engajadora.', preco: 'R$100,00', img: cursoQuimicaImg }
+    ]
+  },
+  {
+    categoria: 'Ingressos para Eventos',
+    itens: [
+      { id: 17, nome: 'Ingresso para o Evento de Lançamento de Livros', desc: 'Participe do nosso evento de lançamento e encontre seus autores favoritos.', preco: 'R$50,00', img: ingressoEventoImg }
+    ]
+  }
+];
+
 function Ecommerce() {
   return (
     <main className="ecommerce-main">
-      <h2>Explore Nossos Produtos</h2>
-      <h3 className="section-header">Fardas Escolares</h3>
-      <div className="flex">
-        <div className="produto-container">
-          <img src={camisaEscolarImg} alt="Camisa escolar" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">Camisa escolar</h3>
-            <p className="produto-desc">Camisas confortáveis para o dia a dia do seu filho.</p>
-            <span className="produto-preco">R$40,00</span>
-            <button className="btn-comprar" onClick={() => alert('Camisa escolar adicionada ao carrinho!')}>Comprar</button>
+      <div className="background"></div>
+      <div className="container">
+        <h2 className="main-title">Explore Nossos Produtos</h2>
+        {produtos.map(categoria => (
+          <div key={categoria.categoria} className="categoria">
+            <h3 className="section-header">{categoria.categoria}</h3>
+            <div className="flex">
+              {categoria.itens.map(produto => (
+                <div key={produto.id} className="produto-container">
+                  <img src={produto.img} alt={produto.nome} className="produto-img" />
+                  <div className="produto-info">
+                    <h3 className="produto-titulo">{produto.nome}</h3>
+                    <p className="produto-desc">{produto.desc}</p>
+                    <span className="produto-preco">{produto.preco}</span>
+                    <button className="btn-comprar" onClick={() => alert(`${produto.nome} adicionado ao carrinho!`)}>Comprar</button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="produto-container">
-          <img src={calcaEscolarImg} alt="Calça Escolar" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">Calça Escolar</h3>
-            <p className="produto-desc">Calças confortáveis para o uso diário escolar.</p>
-            <span className="produto-preco">R$40,00</span>
-            <button className="btn-comprar" onClick={() => alert('Calça Escolar adicionada ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={shortEscolarImg} alt="Short Escolar" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">Short Escolar</h3>
-            <p className="produto-desc">Shorts leves e confortáveis para atividades escolares.</p>
-            <span className="produto-preco">R$40,00</span>
-            <button className="btn-comprar" onClick={() => alert('Short Escolar adicionado ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
-      </div>
-
-      <h3 className="section-header">Cursos Particulares</h3>
-      <div className="flex">
-        <div className="produto-container">
-          <img src={cursoMatematicaImg} alt="Curso de Matematica" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">Curso de Matemática</h3>
-            <p className="produto-desc">Melhore suas habilidades matemáticas com nosso curso interativo.</p>
-            <span className="produto-preco">R$100,00</span>
-            <button className="btn-comprar" onClick={() => alert('Curso de Matemática adicionado ao carrinho!')}>Inscrever-se</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={cursoProgramacaoImg} alt="Curso de Programação" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">Curso de Programação para Iniciantes</h3>
-            <p className="produto-desc">Introdução à programação com foco prático e didático.</p>
-            <span className="produto-preco">R$60,00</span>
-            <button className="btn-comprar" onClick={() => alert('Curso de Programação adicionado ao carrinho!')}>Inscrever-se</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={cursoFisicaImg} alt="Curso de Física" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">Curso de Física</h3>
-            <p className="produto-desc">Explore os fundamentos da física com abordagens interativas.</p>
-            <span className="produto-preco">R$100,00</span>
-            <button className="btn-comprar" onClick={() => alert('Curso de Física adicionado ao carrinho!')}>Inscrever-se</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={cursoQuimicaImg} alt="Curso de Química" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">Curso de Química</h3>
-            <p className="produto-desc">Aprenda química de forma prática e engajadora.</p>
-            <span className="produto-preco">R$100,00</span>
-            <button className="btn-comprar" onClick={() => alert('Curso de Química adicionado ao carrinho!')}>Inscrever-se</button>
-          </div>
-        </div>
-      </div>
-
-      <h3 className="section-header">Ingressos para Eventos</h3>
-      <div className="flex">
-        <div className="produto-container">
-          <img src={ingressoEventoImg} alt="Ingresso para Evento" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">Ingresso para o Evento de Lançamento de Livros</h3>
-            <p className="produto-desc">Participe do nosso evento de lançamento e encontre seus autores favoritos.</p>
-            <span className="produto-preco">R$50,00</span>
-            <button className="btn-comprar" onClick={() => alert('Ingresso para Evento adicionado ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
-      </div>
-
-      <h3 className="section-header">Livros</h3>
-      <div className="flex">
-        <div className="produto-container">
-          <img src={livroOnePieceImg} alt="Livro ONE PIECE" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">ONE PIECE</h3>
-            <p className="produto-desc">Echiro Oda</p>
-            <span className="produto-preco">R$30,00</span>
-            <button className="btn-comprar" onClick={() => alert('Livro ONE PIECE adicionado ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={livroSenhorAneisImg} alt="Livro SENHOR DOS ANEIS" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">SENHOR DOS ANEIS</h3>
-            <p className="produto-desc">J.R.R. Tolkien</p>
-            <span className="produto-preco">R$45,00</span>
-            <button className="btn-comprar" onClick={() => alert('Livro SENHOR DOS ANEIS adicionado ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={livroHarryPotterImg} alt="Livro HARRY POTTER" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">HARRY POTTER</h3>
-            <p className="produto-desc">J.K. Rowling</p>
-            <span className="produto-preco">R$50,00</span>
-            <button className="btn-comprar" onClick={() => alert('Livro HARRY POTTER adicionado ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={livroPaiRicoPaiPobreImg} alt="Livro PAI RICO PAI POBRE" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">PAI RICO PAI POBRE</h3>
-            <p className="produto-desc">Robert T. Kiyosaki</p>
-            <span className="produto-preco">R$35,00</span>
-            <button className="btn-comprar" onClick={() => alert('Livro PAI RICO PAI POBRE adicionado ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={livroInvestidorInteligenteImg} alt="Livro O INVESTIDOR INTELIGENTE" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">O INVESTIDOR INTELIGENTE</h3>
-            <p className="produto-desc">Benjamin Graham</p>
-            <span className="produto-preco">R$40,00</span>
-            <button className="btn-comprar" onClick={() => alert('Livro O INVESTIDOR INTELIGENTE adicionado ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={livroAcoesComunsImg} alt="Livro AÇÕES COMUNS, LUCROS EXTRAORDINÁRIOS" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">AÇÕES COMUNS, LUCROS EXTRAORDINÁRIOS</h3>
-            <p className="produto-desc">Philip Fisher</p>
-            <span className="produto-preco">R$45,00</span>
-            <button className="btn-comprar" onClick={() => alert('Livro AÇÕES COMUNS, LUCROS EXTRAORDINÁRIOS adicionado ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={livroEstruturaRevolucaoImg} alt="A Estrutura das Revoluções Científicas" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">A Estrutura das Revoluções Científicas</h3>
-            <p className="produto-desc">Thomas S. Kuhn</p>
-            <span className="produto-preco">R$55,00</span>
-            <button className="btn-comprar" onClick={() => alert('Livro A Estrutura das Revoluções Científicas adicionado ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={livroComoMenteFuncionaImg} alt="Como a Mente Funciona" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">Como a Mente Funciona</h3>
-            <p className="produto-desc">Steven Pinker</p>
-            <span className="produto-preco">R$60,00</span>
-            <button className="btn-comprar" onClick={() => alert('Livro Como a Mente Funciona adicionado ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
-        <div className="produto-container">
-          <img src={livroLimitesInterpretacaoImg} alt="Os Limites da Interpretação" className="produto-img" />
-          <div className="produto-info">
-            <h3 className="produto-titulo">Os Limites da Interpretação</h3>
-            <p className="produto-desc">Umberto Eco</p>
-            <span className="produto-preco">R$50,00</span>
-            <button className="btn-comprar" onClick={() => alert('Livro Os Limites da Interpretação adicionado ao carrinho!')}>Comprar</button>
-          </div>
-        </div>
+        ))}
       </div>
     </main>
   );
