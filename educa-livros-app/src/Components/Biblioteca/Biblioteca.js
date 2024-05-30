@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Biblioteca.css';
 import onePieceImg from '../imgs/img OP - livro 1-250px.webp';
 import senhorDosAneisImg from '../imgs/novaFotoSenhorAneis.jpg';
@@ -10,56 +10,54 @@ import estruturaRevolucaoCientificaImg from '../imgs/A estrutura da Revolução 
 import comoMenteFuncionaImg from '../imgs/Como a mente funciona-250px.jpg';
 import limitesInterpretacaoImg from '../imgs/os limites da interpretacao -250 px.jpg';
 
+const livros = [
+  { id: 1, categoria: 'Ficção', titulo: 'ONE PIECE', autor: 'Echiro Oda', img: onePieceImg },
+  { id: 2, categoria: 'Ficção', titulo: 'SENHOR DOS ANEIS', autor: 'J.R.R. Tolkien', img: senhorDosAneisImg },
+  { id: 3, categoria: 'Ficção', titulo: 'HARRY POTTER', autor: 'J.K. Rowling', img: harryPotterImg },
+  { id: 4, categoria: 'Finanças', titulo: 'PAI RICO PAI POBRE', autor: 'Robert T. Kiyosaki', img: paiRicoPaiPobreImg },
+  { id: 5, categoria: 'Finanças', titulo: 'O INVESTIDOR INTELIGENTE', autor: 'Benjamin Graham', img: investidorInteligenteImg },
+  { id: 6, categoria: 'Finanças', titulo: 'AÇÕES COMUNS, LUCROS EXTRAORDINÁRIOS', autor: 'Philip Fisher', img: acoesComunsImg },
+  { id: 7, categoria: 'Conhecimento', titulo: 'A ESTRUTURA DAS REVOLUÇÕES CIENTÍFICAS', autor: 'Thomas S. Kuhn', img: estruturaRevolucaoCientificaImg },
+  { id: 8, categoria: 'Conhecimento', titulo: 'COMO A MENTE FUNCIONA', autor: 'Steven Pinker', img: comoMenteFuncionaImg },
+  { id: 9, categoria: 'Conhecimento', titulo: 'OS LIMITES DA INTERPRETAÇÃO', autor: 'Umberto Eco', img: limitesInterpretacaoImg },
+];
+
 function Biblioteca() {
+  const [termoPesquisa, setTermoPesquisa] = useState('');
+
+  const livrosFiltrados = livros.filter(livro =>
+    livro.titulo.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
+    livro.autor.toLowerCase().includes(termoPesquisa.toLowerCase())
+  );
+
+  const categorias = [...new Set(livrosFiltrados.map(livro => livro.categoria))];
+
   return (
     <div className="biblioteca">
-      <h1 className="estiloTITULO">FICÇÃO</h1>
-      <div className="livro">
-        <img src={onePieceImg} alt="Livro ONE PIECE" />
-        <p>Echiro Oda</p>
-        <a href="/ecommerce"><button>Comprar</button></a>
-      </div>
-      <div className="livro">
-        <img src={senhorDosAneisImg} alt="Livro SENHOR DOS ANEIS" />
-        <p>J.R.R. Tolkien</p>
-        <a href="/ecommerce"><button>Comprar</button></a>
-      </div>
-      <div className="livro">
-        <img src={harryPotterImg} alt="Livro HARRY POTTER" />
-        <p>J.K. Rowling</p>
-        <a href="/ecommerce"><button>Comprar</button></a>
-      </div>
-      <h1 className="estiloTITULO">FINANÇAS</h1>
-      <div className="livro">
-        <img src={paiRicoPaiPobreImg} alt="Livro PAI RICO PAI POBRE" />
-        <p>Robert T. Kiyosaki</p>
-        <a href="/ecommerce"><button>Comprar</button></a>
-      </div>
-      <div className="livro">
-        <img src={investidorInteligenteImg} alt="livro O INVESTIDOR INTELIGENTE" />
-        <p>Benjamin Graham</p>
-        <a href="/ecommerce"><button>Comprar</button></a>
-      </div>
-      <div className="livro">
-        <img src={acoesComunsImg} alt="livro AÇÕES COMUNS, LUCROS EXTRAORDINÁRIOS" />
-        <p>Philip Fisher</p>
-        <a href="/ecommerce"><button>Comprar</button></a>
-      </div>
-      <h1 className="estiloTITULO">CONHECIMENTO</h1>
-      <div className="livro">
-        <img src={estruturaRevolucaoCientificaImg} alt="livro A ESTRUTURA DAS REVOLUÇÕES CIENTÍFICAS" />
-        <p>Thomas S. Kuhn</p>
-        <a href="/ecommerce"><button>Comprar</button></a>
-      </div>
-      <div className="livro">
-        <img src={comoMenteFuncionaImg} alt="livro COMO A MENTE FUNCIONA" />
-        <p>Steven Pinker</p>
-        <a href="/ecommerce"><button>Comprar</button></a>
-      </div>
-      <div className="livro">
-        <img src={limitesInterpretacaoImg} alt="livro OS LIMITES DA INTERPRETAÇÃO" />
-        <p>Umberto Eco</p>
-        <a href="/ecommerce"><button>Comprar</button></a>
+      <div className="background"></div>
+      <div className="biblioteca-container">
+        <h1 className="biblioteca-title">Biblioteca</h1>
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="Pesquisar livros..."
+          value={termoPesquisa}
+          onChange={(e) => setTermoPesquisa(e.target.value)}
+        />
+        {categorias.map(categoria => (
+          <div key={categoria} className="categoria">
+            <h2 className="categoria-title">{categoria}</h2>
+            <div className="livros-grid">
+              {livrosFiltrados.filter(livro => livro.categoria === categoria).map(livro => (
+                <div key={livro.id} className="livro">
+                  <img src={livro.img} alt={`Livro ${livro.titulo}`} />
+                  <p className="livro-titulo">{livro.autor}</p>
+                  <a href="/ecommerce"><button className="comprar-button">Comprar</button></a>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
