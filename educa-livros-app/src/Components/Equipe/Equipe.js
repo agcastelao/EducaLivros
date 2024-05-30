@@ -14,22 +14,22 @@ function Equipe() {
           <div className="membro">
             <img src={Cau} alt="Cau" className="membro-img" />
             <h3 className="membro-nome">Cau</h3>
-            <p className="membro-funcao">Back-End</p>
+            <p className="membro-funcao backend">Back-End</p>
           </div>
           <div className="membro">
             <img src={Castelao} alt="Castelao" className="membro-img" />
             <h3 className="membro-nome">Castelao</h3>
-            <p className="membro-funcao">Back-End</p>
+            <p className="membro-funcao backend">Back-End</p>
           </div>
           <div className="membro">
             <img src={Vital} alt="Vital" className="membro-img" />
             <h3 className="membro-nome">Vital</h3>
-            <p className="membro-funcao">Front-End</p>
+            <p className="membro-funcao frontend">Front-End</p>
           </div>
           <div className="membro">
             <img src={Moraes} alt="Moraes" className="membro-img" />
             <h3 className="membro-nome">Moraes</h3>
-            <p className="membro-funcao">Front-End</p>
+            <p className="membro-funcao frontend">Front-End</p>
           </div>
         </div>
       </div>
