@@ -15,7 +15,7 @@ function Footer() {
           </div>
           <div className="col-md-4">
             <ul className="nav justify-content-end">
-              <li className="nav-item"><a href="/home" className="nav-link px-2 text-muted">Home</a></li>
+              <li className="nav-item"><a href="/" className="nav-link px-2 text-muted">Home</a></li>
               <li className="nav-item"><a href="/informacoes" className="nav-link px-2 text-muted">Informações</a></li>
               <li className="nav-item"><a href="/ecommerce" className="nav-link px-2 text-muted">E-commerce</a></li>
               <li className="nav-item"><a href="/biblioteca" className="nav-link px-2 text-muted">Biblioteca</a></li>
