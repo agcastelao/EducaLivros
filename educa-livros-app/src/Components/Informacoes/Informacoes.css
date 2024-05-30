@@ -1,5 +1,15 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
 .bg-color2 {
   background-color: #e7eaf6;
+  padding: 4rem 0;
+  text-align: center;
 }
 
 .color-2 {
@@ -8,4 +18,128 @@
 
 .color-3 {
   color: black;
+}
+
+.informacoes-header {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.informacoes-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+}
+
+.informacoes-content {
+  flex: 1;
+  max-width: 45%;
+  min-width: 300px;
+  text-align: left;
+}
+
+.informacoes-content img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.informacoes-content h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.informacoes-content p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.informacoes-footer {
+  background-color: #333;
+  color: white;
+  padding: 3rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.informacoes-footer-left {
+  flex: 1;
+  text-align: left;
+}
+
+.informacoes-footer-left .instagram-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.informacoes-footer-left .instagram-logo img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.informacoes-footer-left h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.informacoes-footer-left p {
+  font-size: 1.25rem;
+  color: #e7eaf6;
+  margin-bottom: 1.5rem;
+}
+
+.informacoes-footer-right {
+  flex: 2;
+  text-align: left;
+}
+
+.informacoes-footer-right .event-header {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.informacoes-footer-right .event-details {
+  margin-left: 1rem;
+}
+
+.informacoes-footer-right p {
+  font-size: 1.25rem;
+  color: #e7eaf6;
+  margin-bottom: 0.5rem; 
+}
+
+.informacoes-footer-right a {
+  color: #f95959;
+  text-decoration: none;
+}
+
+.informacoes-footer-right a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .informacoes-section {
+    flex-direction: column;
+  }
+
+  .informacoes-content {
+    max-width: 100%;
+  }
+
+  .informacoes-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .informacoes-footer-left,
+  .informacoes-footer-right {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
 }
