@@ -34,7 +34,7 @@ function Biblioteca() {
 
   return (
     <div className="biblioteca">
-      <div className="background"></div>
+      <div className="biblioteca-background"></div>
       <div className="biblioteca-container">
         <h1 className="biblioteca-title">Biblioteca</h1>
         <input
