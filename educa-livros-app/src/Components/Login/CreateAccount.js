@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Login.css';
+import './CreateAccount.css';
 
-function Login() {
-  const [errorMessage, setErrorMessage] = useState('');
+function CreateAccount() {
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const name = e.target.typeNameX.value;
     const email = e.target.typeEmailX.value;
     const password = e.target.typePasswordX.value;
+    const confirmPassword = e.target.typeConfirmPasswordX.value;
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(u => u.email === email && u.password === password);
-
-    if (!user) {
-      setErrorMessage('Email ou senha incorretos');
+    if (password !== confirmPassword) {
+      setErrorMessage('As senhas não coincidem');
       return;
     }
 
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    users.push({ name, email, password });
+    localStorage.setItem('users', JSON.stringify(users));
+
     setErrorMessage('');
-    setSuccessMessage('Login sucedido!');
+    setSuccessMessage('Conta criada com sucesso');
     setTimeout(() => {
-      navigate('/'); 
+      navigate('/login');
     }, 2000); 
   };
 
@@ -35,12 +38,16 @@ function Login() {
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
               <div className="card bg-dark text-white" style={{ borderRadius: '1rem' }}>
                 <div className="card-body p-5 text-center">
-                  {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                   {successMessage && <div className="alert alert-success">{successMessage}</div>}
+                  {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                   <div className="mb-md-5 mt-md-4 pb-5">
-                    <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                    <p className="text-white-50 mb-5">Por favor digite seu E-mail e senha</p>
+                    <h2 className="fw-bold mb-2 text-uppercase">Criar Conta</h2>
+                    <p className="text-white-50 mb-5">Por favor, preencha os campos abaixo para criar uma conta</p>
                     <form onSubmit={handleSubmit}>
+                      <div className="form-outline form-white mb-4">
+                        <input type="text" id="typeNameX" className="form-control form-control-lg" required />
+                        <label className="form-label" htmlFor="typeNameX">Nome</label>
+                      </div>
                       <div className="form-outline form-white mb-4">
                         <input type="email" id="typeEmailX" className="form-control form-control-lg" required />
                         <label className="form-label" htmlFor="typeEmailX">Email</label>
@@ -49,19 +56,12 @@ function Login() {
                         <input type="password" id="typePasswordX" className="form-control form-control-lg" required />
                         <label className="form-label" htmlFor="typePasswordX">Senha</label>
                       </div>
-                      <p className="small mb-5 pb-lg-2">
-                        <a className="text-white-50" href="/reset-password">Esqueceu a senha?</a>
-                      </p>
-                      <button className="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-                      <div className="d-flex justify-content-center text-center mt-4 pt-1">
-                        <a href="#!" className="text-white"><i className="fab fa-facebook-f fa-lg"></i></a>
-                        <a href="#!" className="text-white"><i className="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                        <a href="#!" className="text-white"><i className="fab fa-google fa-lg"></i></a>
+                      <div className="form-outline form-white mb-4">
+                        <input type="password" id="typeConfirmPasswordX" className="form-control form-control-lg" required />
+                        <label className="form-label" htmlFor="typeConfirmPasswordX">Confirme sua Senha</label>
                       </div>
+                      <button className="btn btn-outline-light btn-lg px-5" type="submit">Criar Conta</button>
                     </form>
-                  </div>
-                  <div>
-                    <p className="mb-0">Não possui uma conta? <a href="/create-account" className="text-white-50 fw-bold">Crie sua conta</a></p>
                   </div>
                 </div>
               </div>
@@ -73,4 +73,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default CreateAccount;

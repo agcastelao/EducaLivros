@@ -4,8 +4,8 @@ import './Header.css';
 function Header() {
   return (
     <header>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container">
+      <nav className="navbar-do-header navbar-expand-lg navbar-dark bg-dark">
+        <div className="container-do-header">
           <div>
             <a className="navbar-brand" href="/">EducaLivros</a>
           </div>
