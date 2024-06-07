@@ -8,6 +8,8 @@ import HomePage from './Components/Home/HomePage';
 import Informacoes from './Components/Informacoes/Informacoes';
 import Equipe from './Components/Equipe/Equipe';
 import Login from './Components/Login/Login';
+import CreateAccount from './Components/Login/CreateAccount';
+import ResetPassword from './Components/Login/ResetPassword';
 import './App.css';
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
           <Route path="/informacoes" element={<Informacoes />} />
           <Route path="/equipe" element={<Equipe />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
         <Footer />
       </div>
