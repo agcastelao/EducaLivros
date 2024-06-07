@@ -2,6 +2,7 @@ package educalivros.spring.api.models;
 
 import java.io.Serializable;
 
+import educalivros.spring.api.models.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,9 +10,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "cliente")
-public class Client implements Serializable{
+public class Client extends User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,36 +37,47 @@ public class Client implements Serializable{
     public Long getId_cliente() {
         return id_cliente;
     }
+
     public void setId_cliente(Long id_cliente) {
         this.id_cliente = id_cliente;
     }
+    
     public String getNome() {
         return nome;
     }
+    
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
     public String getSobrenome() {
         return sobrenome;
     }
+    
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
+    
     public String getTelefone() {
         return telefone;
     }
+    
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+    
     public String getEmail() {
         return email;
     }
+    
     public void setEmail(String email) {
         this.email = email;
     }
+    
     public String getCpf() {
         return cpf;
     }
+    
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
