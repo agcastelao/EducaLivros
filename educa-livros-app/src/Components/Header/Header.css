@@ -5,15 +5,17 @@
 
 .navbar-do-header .container-do-header {
   height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-left: 15%; 
   margin-right: 15%; 
 }
 
 .container-do-header ul {
-  justify-content: center;
-  width: 100%;
+  display: flex;
   align-items: center;
-  gap: 15px; 
+  gap: 20px; 
 }
 
 .container-do-header ul li {
