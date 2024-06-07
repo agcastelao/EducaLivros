@@ -33,7 +33,7 @@ function ResetPassword() {
     setSuccessMessage('Senha redefinida com sucesso');
     setTimeout(() => {
       navigate('/login');
-    }, 2000); 
+    }, 2000); // oi
   };
 
   return (

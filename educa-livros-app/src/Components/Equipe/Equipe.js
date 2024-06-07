@@ -29,7 +29,7 @@ function Equipe() {
           <div className="membro">
             <img src={Moraes} alt="Moraes" className="membro-img" />
             <h3 className="membro-nome">Felipe de Moraes</h3>
-            <p className="membro-funcao frontend">Front-End</p>
+            <p className="membro-funcao frontend">Front-End</p> 
           </div>
         </div>
       </div>
