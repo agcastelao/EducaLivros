@@ -9,6 +9,7 @@ function ResetPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const email = e.target.typeEmailX.value;
     const password = e.target.typeNewPasswordX.value;
     const confirmPassword = e.target.typeConfirmNewPasswordX.value;
 
@@ -16,6 +17,17 @@ function ResetPassword() {
       setErrorMessage('As senhas não coincidem');
       return;
     }
+
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const userIndex = users.findIndex(u => u.email === email);
+
+    if (userIndex === -1) {
+      setErrorMessage('Email não encontrado');
+      return;
+    }
+
+    users[userIndex].password = password;
+    localStorage.setItem('users', JSON.stringify(users));
 
     setErrorMessage('');
     setSuccessMessage('Senha redefinida com sucesso');

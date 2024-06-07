@@ -27,7 +27,7 @@ function CreateAccount() {
     setSuccessMessage('Conta criada com sucesso');
     setTimeout(() => {
       navigate('/login');
-    }, 2000); // Redireciona após 2 segundos
+    }, 2000); 
   };
 
   return (
