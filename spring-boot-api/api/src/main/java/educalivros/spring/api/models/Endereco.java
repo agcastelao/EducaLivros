@@ -1,12 +1,16 @@
 package educalivros.spring.api.models;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,6 +34,16 @@ public class Endereco implements Serializable{
     @Column(nullable = false)
     private String rua_complemento;
 
+    @JsonBackReference
+    @ManyToMany(mappedBy = "enderecos")
+    private List<Client> clientes;
+
+    public List<Client> getClientes() {
+        return clientes;
+    }
+    public void setClientes(List<Client> clientes) {
+        this.clientes = clientes;
+    }
     public String getCodigo_postal() {
         return codigo_postal;
     }
@@ -69,6 +83,7 @@ public class Endereco implements Serializable{
         result = prime * result + ((estado == null) ? 0 : estado.hashCode());
         result = prime * result + ((rua_nome == null) ? 0 : rua_nome.hashCode());
         result = prime * result + ((rua_complemento == null) ? 0 : rua_complemento.hashCode());
+        result = prime * result + ((clientes == null) ? 0 : clientes.hashCode());
         return result;
     }
     @Override
@@ -105,9 +120,13 @@ public class Endereco implements Serializable{
                 return false;
         } else if (!rua_complemento.equals(other.rua_complemento))
             return false;
+        if (clientes == null) {
+            if (other.clientes != null)
+                return false;
+        } else if (!clientes.equals(other.clientes))
+            return false;
         return true;
     }
-
     
 
 }

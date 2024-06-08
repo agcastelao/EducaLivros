@@ -1,12 +1,18 @@
 package educalivros.spring.api.models;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,6 +37,24 @@ public class Client implements Serializable {
 
     @Column(nullable = false)
     private String cpf;
+
+    @JsonBackReference
+    @ManyToMany
+    @JoinTable(
+        name = "cliente_endereco",
+        joinColumns = @JoinColumn(name = "id_cliente_fk"),
+        inverseJoinColumns = @JoinColumn(name = "id_endereco_fk")
+    )
+    private List<Endereco> enderecos;
+
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
 
     public Long getId_cliente() {
         return id_cliente;
@@ -90,9 +114,10 @@ public class Client implements Serializable {
         result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+        result = prime * result + ((enderecos == null) ? 0 : enderecos.hashCode());
         return result;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -132,8 +157,14 @@ public class Client implements Serializable {
                 return false;
         } else if (!cpf.equals(other.cpf))
             return false;
+        if (enderecos == null) {
+            if (other.enderecos != null)
+                return false;
+        } else if (!enderecos.equals(other.enderecos))
+            return false;
         return true;
     }
+    
 
     
 }
