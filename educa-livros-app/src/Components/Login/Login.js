@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Login.css';
 
 function Login() {
@@ -7,26 +8,26 @@ function Login() {
   const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const username = e.target.typeUsernameX.value; 
+    const username = e.target.typeUsernameX.value;
     const password = e.target.typePasswordX.value;
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(u => u.username === username && u.password === password);
-
-    if (!user) {
+    try {
+      const response = await axios.post('/auth/login', { username, password });
+      if (response.status === 200) {
+        setSuccessMessage('Login sucedido!');
+        localStorage.setItem('user', JSON.stringify(response.data));
+        setTimeout(() => {
+          navigate('/');
+          window.location.reload();
+        }, 2000);
+      } else {
+        setErrorMessage('Usuário ou senha incorretos');
+      }
+    } catch (error) {
       setErrorMessage('Usuário ou senha incorretos');
-      return;
     }
-
-    setErrorMessage('');
-    setSuccessMessage('Login sucedido!');
-    localStorage.setItem('isAuthenticated', 'true');
-    localStorage.setItem('currentUser', JSON.stringify(user)); 
-    setTimeout(() => {
-      navigate('/');
-    }, 2000); 
   };
 
   return (
@@ -41,11 +42,11 @@ function Login() {
                   {successMessage && <div className="alert alert-success">{successMessage}</div>}
                   <div className="mb-md-5 mt-md-4 pb-5">
                     <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                    <p className="text-white-50 mb-5">Por favor digite seu nome de usuário e senha</p>
+                    <p className="text-white-50 mb-5">Por favor digite seu usuário e senha</p>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline form-white mb-4">
                         <input type="text" id="typeUsernameX" className="form-control form-control-lg" required />
-                        <label className="form-label" htmlFor="typeUsernameX">Nome de Usuário</label>
+                        <label className="form-label" htmlFor="typeUsernameX">Usuário</label>
                       </div>
                       <div className="form-outline form-white mb-4">
                         <input type="password" id="typePasswordX" className="form-control form-control-lg" required />

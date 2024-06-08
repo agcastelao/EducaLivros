@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './ResetPassword.css';
 
 function ResetPassword() {
@@ -7,33 +8,30 @@ function ResetPassword() {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const username = e.target.typeUsernameX.value;
-    const password = e.target.typeNewPasswordX.value;
+    const email = e.target.typeEmailX.value;
+    const newPassword = e.target.typeNewPasswordX.value;
     const confirmPassword = e.target.typeConfirmNewPasswordX.value;
 
-    if (password !== confirmPassword) {
+    if (newPassword !== confirmPassword) {
       setErrorMessage('As senhas não coincidem');
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(u => u.username === username);
-
-    if (!user) {
-      setErrorMessage('Nome de usuário não encontrado');
-      return;
+    try {
+      const response = await axios.post('/auth/reset-password', { email, newPassword });
+      if (response.status === 200) {
+        setSuccessMessage('Senha redefinida com sucesso');
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+      } else {
+        setErrorMessage('Erro ao redefinir a senha');
+      }
+    } catch (error) {
+      setErrorMessage('Erro ao redefinir a senha');
     }
-
-    user.password = password;
-    localStorage.setItem('users', JSON.stringify(users));
-
-    setErrorMessage('');
-    setSuccessMessage('Senha redefinida com sucesso');
-    setTimeout(() => {
-      navigate('/login');
-    }, 2000);
   };
 
   return (
@@ -48,11 +46,11 @@ function ResetPassword() {
                   {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                   <div className="mb-md-5 mt-md-4 pb-5">
                     <h2 className="fw-bold mb-2 text-uppercase">Esqueceu a Senha</h2>
-                    <p className="text-white-50 mb-5">Por favor, insira seu nome de usuário e nova senha</p>
+                    <p className="text-white-50 mb-5">Por favor, insira seu e-mail e nova senha</p>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline form-white mb-4">
-                        <input type="text" id="typeUsernameX" className="form-control form-control-lg" required />
-                        <label className="form-label" htmlFor="typeUsernameX">Nome de usuário</label>
+                        <input type="email" id="typeEmailX" className="form-control form-control-lg" required />
+                        <label className="form-label" htmlFor="typeEmailX">Email</label>
                       </div>
                       <div className="form-outline form-white mb-4">
                         <input type="password" id="typeNewPasswordX" className="form-control form-control-lg" required />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './CreateAccount.css';
 
 function CreateAccount() {
@@ -7,7 +8,7 @@ function CreateAccount() {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const username = e.target.typeUsernameX.value;
     const password = e.target.typePasswordX.value;
@@ -18,20 +19,19 @@ function CreateAccount() {
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (users.find(u => u.username === username)) {
-      setErrorMessage('Nome de usuário já existe');
-      return;
+    try {
+      const response = await axios.post('/auth/register', { username, password });
+      if (response.status === 201) {
+        setSuccessMessage('Conta criada com sucesso');
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+      } else {
+        setErrorMessage('Erro ao criar a conta');
+      }
+    } catch (error) {
+      setErrorMessage('Erro ao criar a conta');
     }
-
-    users.push({ username, password });
-    localStorage.setItem('users', JSON.stringify(users));
-
-    setErrorMessage('');
-    setSuccessMessage('Conta criada com sucesso');
-    setTimeout(() => {
-      navigate('/login');
-    }, 2000);
   };
 
   return (
@@ -46,11 +46,11 @@ function CreateAccount() {
                   {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                   <div className="mb-md-5 mt-md-4 pb-5">
                     <h2 className="fw-bold mb-2 text-uppercase">Criar Conta</h2>
-                    <p className="text-white-50 mb-5">Por favor, preencha os campos abaixo para criar uma conta</p>
+                    <p className="text-white-50 mb-5">Por favor preencha os campos abaixo para criar sua conta</p>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline form-white mb-4">
                         <input type="text" id="typeUsernameX" className="form-control form-control-lg" required />
-                        <label className="form-label" htmlFor="typeUsernameX">Nome de usuário</label>
+                        <label className="form-label" htmlFor="typeUsernameX">Usuário</label>
                       </div>
                       <div className="form-outline form-white mb-4">
                         <input type="password" id="typePasswordX" className="form-control form-control-lg" required />
@@ -58,10 +58,13 @@ function CreateAccount() {
                       </div>
                       <div className="form-outline form-white mb-4">
                         <input type="password" id="typeConfirmPasswordX" className="form-control form-control-lg" required />
-                        <label className="form-label" htmlFor="typeConfirmPasswordX">Confirme sua Senha</label>
+                        <label className="form-label" htmlFor="typeConfirmPasswordX">Confirme sua senha</label>
                       </div>
                       <button className="btn btn-outline-light btn-lg px-5" type="submit">Criar Conta</button>
                     </form>
+                  </div>
+                  <div>
+                    <p className="mb-0">Já possui uma conta? <a href="/login" className="text-white-50 fw-bold">Faça login</a></p>
                   </div>
                 </div>
               </div>
