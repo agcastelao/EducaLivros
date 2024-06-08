@@ -1,32 +1,41 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import './Login.css';
+import api from '../Services/Api';
 
 function Login() {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+
+  const [login, setLogin] = useState('');
+  const [senha, setSenha] = useState('');
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const username = e.target.value;
-    const password = e.target.value;
+    // const login = e.target.typeUsernameX.value;
+    // const senha = e.target.typePasswordX.value;
+    const userData = {
+        login,
+        senha
+    }
 
     try {
-      const response = await axios.post('/auth/login', { username, password });
+      const response = await api.post('/auth/login', userData);
       if (response.status === 200) {
         setSuccessMessage('Login sucedido!');
-        localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('user', login);
+        localStorage.setItem('accessToken', response.data.token);
         setTimeout(() => {
           navigate('/');
           window.location.reload();
         }, 2000);
       } else {
-        setErrorMessage('Usuário ou senha incorretos ');
+        setErrorMessage('Login ou senha incorretos ');
       }
     } catch (error) {
-      setErrorMessage('Usuário ou senha incorretos');
+      setErrorMessage('Login ou senha incorretos');
     }
   };
 
@@ -45,11 +54,11 @@ function Login() {
                     <p className="text-white-50 mb-5">Por favor digite seu usuário e senha</p>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline form-white mb-4">
-                        <input type="text" id="typeUsernameX" className="form-control form-control-lg" required />
+                        <input type="text" value={login} onChange={(e) => setLogin(e.target.value)} className="form-control form-control-lg" required />
                         <label className="form-label" htmlFor="typeUsernameX">Usuário</label>
                       </div>
                       <div className="form-outline form-white mb-4">
-                        <input type="password" id="typePasswordX" className="form-control form-control-lg" required />
+                        <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} className="form-control form-control-lg" required />
                         <label className="form-label" htmlFor="typePasswordX">Senha</label>
                       </div>
                       <p className="small mb-5 pb-lg-2">
