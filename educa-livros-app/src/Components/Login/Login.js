@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 
@@ -7,7 +7,6 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
-  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,10 +18,6 @@ function Login() {
       if (response.status === 200) {
         setSuccessMessage('Login sucedido!');
         localStorage.setItem('user', JSON.stringify(response.data));
-        localStorage.setItem('accessToken', response.data.token);
-
-        history.push('/biblioteca')
-
         setTimeout(() => {
           navigate('/');
           window.location.reload();

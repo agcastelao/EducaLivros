@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ResetPassword.css';
 
@@ -7,21 +7,20 @@ function ResetPassword() {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.value;
-    const newPassword = e.target.value;
+    const password = e.target.value;
     const confirmPassword = e.target.value;
 
-    if (newPassword !== confirmPassword) {
+    if (password !== confirmPassword) {
       setErrorMessage('As senhas não coincidem');
       return;
     }
 
     try {
-      const response = await axios.post('/auth/reset-password', { email, newPassword });
+      const response = await axios.post('/auth/reset-password', { email, password });
       if (response.status === 200) {
         setSuccessMessage('Senha redefinida com sucesso');
         setTimeout(() => {

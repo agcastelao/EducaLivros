@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate, useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './CreateAccount.css';
 
 function CreateAccount() {
-  const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
-  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,21 +17,20 @@ function CreateAccount() {
     if (password !== confirmPassword) {
       setErrorMessage('As senhas não coincidem');
       return;
-
     }
 
     try {
       const response = await axios.post('/auth/register', { username, password });
-      if (response.status === 201) {
-        setSuccessMessage('Conta criada com sucesso');
+      if (response.status === 200) {
+        setSuccessMessage('Conta criada com sucesso!');
         setTimeout(() => {
           navigate('/login');
         }, 2000);
       } else {
-        setErrorMessage('Erro ao criar a conta');
+        setErrorMessage('Erro ao criar conta');
       }
     } catch (error) {
-      setErrorMessage('Erro ao criar a conta');
+      setErrorMessage('Erro ao criar conta');
     }
   };
 
@@ -44,11 +42,11 @@ function CreateAccount() {
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
               <div className="card bg-dark text-white" style={{ borderRadius: '1rem' }}>
                 <div className="card-body p-5 text-center">
-                  {successMessage && <div className="alert alert-success">{successMessage}</div>}
                   {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+                  {successMessage && <div className="alert alert-success">{successMessage}</div>}
                   <div className="mb-md-5 mt-md-4 pb-5">
-                    <h2 className="fw-bold mb-2 text-uppercase">Criar Conta</h2>
-                    <p className="text-white-50 mb-5">Por favor preencha os campos abaixo para criar sua conta</p>
+                    <h2 className="fw-bold mb-2 text-uppercase">Crie sua conta</h2>
+                    <p className="text-white-50 mb-5">Por favor preencha os campos abaixo</p>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline form-white mb-4">
                         <input type="text" id="typeUsernameX" className="form-control form-control-lg" required />
