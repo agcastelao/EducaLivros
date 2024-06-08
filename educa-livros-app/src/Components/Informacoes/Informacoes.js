@@ -10,16 +10,18 @@ function Informacoes() {
     <main>
       <section className="p-5 text-dark bg-color2">
         <div className="container" style={{ padding: '4rem 0 4rem 0' }}>
-          <h2 className="color-3 mb-5">Sobre a EducaLivros</h2>
-          <div className="container d-flex gap-5 m-0 p-0">
-            <div className="col-5">
+          <h2 className="color-3 mb-5 informacoes-header">Sobre a EducaLivros</h2>
+          <div className="container d-flex gap-5 m-0 p-0 informacoes-section">
+            <div className="col-5 informacoes-content">
               <img src={criancaLendo} className="img-fluid rounded" alt="Criança com livros" />
-            </div>
-            <div className="col-5 row">
               <h2><strong>Propósito</strong></h2>
               <p><strong>Na EducaLivros, nosso objetivo é promover o conhecimento e a educação.</strong></p>
-              <p><strong>Missão</strong><br /><i>Nossa missão é proporcionar acesso fácil e acessível a uma ampla variedade de livros e materiais educacionais, incentivando a leitura e o aprendizado em todas as idades.</i></p>
-              <p><strong>Valores</strong><br /><i>Nosso compromisso é com a qualidade, acessibilidade e diversidade, buscando sempre inovar e contribuir para a formação de uma sociedade mais educada e informada.</i></p>
+            </div>
+            <div className="col-5 informacoes-content">
+              <h2><strong>Missão</strong></h2>
+              <p><i>Nossa missão é proporcionar acesso fácil e acessível a uma ampla variedade de livros e materiais educacionais, incentivando a leitura e o aprendizado em todas as idades.</i></p>
+              <h2><strong>Valores</strong></h2>
+              <p><i>Nosso compromisso é com a qualidade, acessibilidade e diversidade, buscando sempre inovar e contribuir para a formação de uma sociedade mais educada e informada.</i></p>
             </div>
           </div>
           <div className="text-center mt-4 equipe-button-container">
