@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './CreateAccount.css';
 
@@ -7,16 +7,18 @@ function CreateAccount() {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const username = e.target.typeUsernameX.value;
-    const password = e.target.typePasswordX.value;
-    const confirmPassword = e.target.typeConfirmPasswordX.value;
+    const username = e.target.value;
+    const password = e.target.value;
+    const confirmPassword = e.target.value;
 
     if (password !== confirmPassword) {
       setErrorMessage('As senhas não coincidem');
       return;
+
     }
 
     try {
