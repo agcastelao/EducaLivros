@@ -9,7 +9,7 @@ function ResetPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const email = e.target.typeEmailX.value;
+    const username = e.target.typeUsernameX.value;
     const password = e.target.typeNewPasswordX.value;
     const confirmPassword = e.target.typeConfirmNewPasswordX.value;
 
@@ -19,21 +19,21 @@ function ResetPassword() {
     }
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    const userIndex = users.findIndex(u => u.email === email);
+    const user = users.find(u => u.username === username);
 
-    if (userIndex === -1) {
-      setErrorMessage('Email não encontrado');
+    if (!user) {
+      setErrorMessage('Nome de usuário não encontrado');
       return;
     }
 
-    users[userIndex].password = password;
+    user.password = password;
     localStorage.setItem('users', JSON.stringify(users));
 
     setErrorMessage('');
     setSuccessMessage('Senha redefinida com sucesso');
     setTimeout(() => {
       navigate('/login');
-    }, 2000); // oi
+    }, 2000);
   };
 
   return (
@@ -48,11 +48,11 @@ function ResetPassword() {
                   {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                   <div className="mb-md-5 mt-md-4 pb-5">
                     <h2 className="fw-bold mb-2 text-uppercase">Esqueceu a Senha</h2>
-                    <p className="text-white-50 mb-5">Por favor, insira seu e-mail e nova senha</p>
+                    <p className="text-white-50 mb-5">Por favor, insira seu nome de usuário e nova senha</p>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline form-white mb-4">
-                        <input type="email" id="typeEmailX" className="form-control form-control-lg" required />
-                        <label className="form-label" htmlFor="typeEmailX">Email</label>
+                        <input type="text" id="typeUsernameX" className="form-control form-control-lg" required />
+                        <label className="form-label" htmlFor="typeUsernameX">Nome de usuário</label>
                       </div>
                       <div className="form-outline form-white mb-4">
                         <input type="password" id="typeNewPasswordX" className="form-control form-control-lg" required />

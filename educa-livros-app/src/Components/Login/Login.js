@@ -9,21 +9,23 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const email = e.target.typeEmailX.value;
+    const username = e.target.typeUsernameX.value; 
     const password = e.target.typePasswordX.value;
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(u => u.email === email && u.password === password);
+    const user = users.find(u => u.username === username && u.password === password);
 
     if (!user) {
-      setErrorMessage('Email ou senha incorretos');
+      setErrorMessage('Usuário ou senha incorretos');
       return;
     }
 
     setErrorMessage('');
     setSuccessMessage('Login sucedido!');
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('currentUser', JSON.stringify(user)); 
     setTimeout(() => {
-      navigate('/'); 
+      navigate('/');
     }, 2000); 
   };
 
@@ -39,11 +41,11 @@ function Login() {
                   {successMessage && <div className="alert alert-success">{successMessage}</div>}
                   <div className="mb-md-5 mt-md-4 pb-5">
                     <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                    <p className="text-white-50 mb-5">Por favor digite seu E-mail e senha</p>
+                    <p className="text-white-50 mb-5">Por favor digite seu nome de usuário e senha</p>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline form-white mb-4">
-                        <input type="email" id="typeEmailX" className="form-control form-control-lg" required />
-                        <label className="form-label" htmlFor="typeEmailX">Email</label>
+                        <input type="text" id="typeUsernameX" className="form-control form-control-lg" required />
+                        <label className="form-label" htmlFor="typeUsernameX">Nome de Usuário</label>
                       </div>
                       <div className="form-outline form-white mb-4">
                         <input type="password" id="typePasswordX" className="form-control form-control-lg" required />

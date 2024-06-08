@@ -9,8 +9,7 @@ function CreateAccount() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const name = e.target.typeNameX.value;
-    const email = e.target.typeEmailX.value;
+    const username = e.target.typeUsernameX.value;
     const password = e.target.typePasswordX.value;
     const confirmPassword = e.target.typeConfirmPasswordX.value;
 
@@ -20,14 +19,19 @@ function CreateAccount() {
     }
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
-    users.push({ name, email, password });
+    if (users.find(u => u.username === username)) {
+      setErrorMessage('Nome de usuário já existe');
+      return;
+    }
+
+    users.push({ username, password });
     localStorage.setItem('users', JSON.stringify(users));
 
     setErrorMessage('');
     setSuccessMessage('Conta criada com sucesso');
     setTimeout(() => {
       navigate('/login');
-    }, 2000); 
+    }, 2000);
   };
 
   return (
@@ -45,12 +49,8 @@ function CreateAccount() {
                     <p className="text-white-50 mb-5">Por favor, preencha os campos abaixo para criar uma conta</p>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline form-white mb-4">
-                        <input type="text" id="typeNameX" className="form-control form-control-lg" required />
-                        <label className="form-label" htmlFor="typeNameX">Nome</label>
-                      </div>
-                      <div className="form-outline form-white mb-4">
-                        <input type="email" id="typeEmailX" className="form-control form-control-lg" required />
-                        <label className="form-label" htmlFor="typeEmailX">Email</label>
+                        <input type="text" id="typeUsernameX" className="form-control form-control-lg" required />
+                        <label className="form-label" htmlFor="typeUsernameX">Nome de usuário</label>
                       </div>
                       <div className="form-outline form-white mb-4">
                         <input type="password" id="typePasswordX" className="form-control form-control-lg" required />
