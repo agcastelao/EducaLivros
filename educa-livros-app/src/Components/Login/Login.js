@@ -14,12 +14,12 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const login = e.target.typeUsernameX.value;
-    // const senha = e.target.typePasswordX.value;
     const userData = {
-        login,
-        senha
-    }
+      //const login = e.target.typeUsernameX.value;
+      //const senha = e.target.typerPasswordX.value;
+      login,
+      senha
+    };
 
     try {
       const response = await api.post('/auth/login', userData);
@@ -29,10 +29,9 @@ function Login() {
         localStorage.setItem('accessToken', response.data.token);
         setTimeout(() => {
           navigate('/');
-          window.location.reload();
         }, 2000);
       } else {
-        setErrorMessage('Login ou senha incorretos ');
+        setErrorMessage('Login ou senha incorretos');
       }
     } catch (error) {
       setErrorMessage('Login ou senha incorretos');
