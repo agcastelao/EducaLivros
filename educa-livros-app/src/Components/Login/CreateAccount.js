@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import './CreateAccount.css';
 import api from '../Services/Api';
 
@@ -20,7 +19,7 @@ function CreateAccount() {
     // const password = e.target.value;
     // const confirmPassword = e.target.value;
 
-    if (password !== confirmPassword) {
+    if (senha !== confirmSenha) {
       setErrorMessage('As senhas não coincidem');
       return;
     }
@@ -31,7 +30,7 @@ function CreateAccount() {
     }
 
     try {
-      const response = await axios.post('/auth/register', data);
+      const response = await api.post('/auth/register', data);
       if (response.status === 200) {
         setSuccessMessage('Conta criada com sucesso!');
         setTimeout(() => {

@@ -9,6 +9,7 @@ import educalivros.spring.api.models.user.RegisterDTO;
 import educalivros.spring.api.repositories.UserRepository;
 import educalivros.spring.api.services.TokenService;
 import educalivros.spring.api.models.user.User;
+import educalivros.spring.api.models.user.roles.UserRole;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +49,7 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().build();
         }
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.senha());
-        User newUser = new User(data.login(), encryptedPassword, data.role());
+        User newUser = new User(data.login(), encryptedPassword, UserRole.USER);
 
         this.userRepository.save(newUser);
 
