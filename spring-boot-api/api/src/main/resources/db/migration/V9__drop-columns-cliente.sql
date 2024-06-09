@@ -1,0 +1,3 @@
+ALTER TABLE cliente DROP COLUMN login;
+ALTER TABLE cliente DROP COLUMN senha;
+ALTER TABLE cliente DROP COLUMN role;
