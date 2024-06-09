@@ -2,32 +2,43 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './CreateAccount.css';
+import api from '../Services/Api';
 
 function CreateAccount() {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+
+  const [login, setLogin] = useState('')
+  const [senha, setSenha] = useState('')
+  const [confirmSenha, setConfirmSenha] = useState('')
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const username = e.target.value;
-    const password = e.target.value;
-    const confirmPassword = e.target.value;
+    // const username = e.target.value;
+    // const password = e.target.value;
+    // const confirmPassword = e.target.value;
 
     if (password !== confirmPassword) {
       setErrorMessage('As senhas não coincidem');
       return;
     }
 
+    const data = {
+      login,
+      senha
+    }
+
     try {
-      const response = await axios.post('/auth/register', { username, password });
+      const response = await axios.post('/auth/register', data);
       if (response.status === 200) {
         setSuccessMessage('Conta criada com sucesso!');
         setTimeout(() => {
           navigate('/login');
         }, 2000);
       } else {
-        setErrorMessage('Erro ao criar conta');
+        setErrorMessage('Erro ao criar conta 1');
       }
     } catch (error) {
       setErrorMessage('Erro ao criar conta');
@@ -49,15 +60,15 @@ function CreateAccount() {
                     <p className="text-white-50 mb-5">Por favor preencha os campos abaixo</p>
                     <form onSubmit={handleSubmit}>
                       <div className="form-outline form-white mb-4">
-                        <input type="text" id="typeUsernameX" className="form-control form-control-lg" required />
+                        <input type="text" value={login} onChange={(e) => setLogin(e.target.value)} className="form-control form-control-lg" required />
                         <label className="form-label" htmlFor="typeUsernameX">Usuário</label>
                       </div>
                       <div className="form-outline form-white mb-4">
-                        <input type="password" id="typePasswordX" className="form-control form-control-lg" required />
+                        <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} className="form-control form-control-lg" required />
                         <label className="form-label" htmlFor="typePasswordX">Senha</label>
                       </div>
                       <div className="form-outline form-white mb-4">
-                        <input type="password" id="typeConfirmPasswordX" className="form-control form-control-lg" required />
+                        <input type="password" value={confirmSenha} onChange={(e) => setConfirmSenha(e.target.value)} className="form-control form-control-lg" required />
                         <label className="form-label" htmlFor="typeConfirmPasswordX">Confirme sua senha</label>
                       </div>
                       <button className="btn btn-outline-light btn-lg px-5" type="submit">Criar Conta</button>

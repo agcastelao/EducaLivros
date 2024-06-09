@@ -10,7 +10,6 @@ import educalivros.spring.api.repositories.UserRepository;
 import educalivros.spring.api.services.TokenService;
 import educalivros.spring.api.models.user.User;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
