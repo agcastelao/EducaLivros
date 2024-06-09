@@ -15,7 +15,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = {
-      //const login = e.target.typeUsernameX.value;
+       //const login = e.target.typeUsernameX.value;
       //const senha = e.target.typerPasswordX.value;
       login,
       senha
@@ -27,8 +27,10 @@ function Login() {
         setSuccessMessage('Login sucedido!');
         localStorage.setItem('user', login);
         localStorage.setItem('accessToken', response.data.token);
+        localStorage.setItem('isAuthenticated', 'true');
         setTimeout(() => {
           navigate('/');
+          window.location.reload();
         }, 2000);
       } else {
         setErrorMessage('Login ou senha incorretos');

@@ -15,6 +15,8 @@ function Header() {
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
     setIsAuthenticated(false);
     navigate('/login');
   };

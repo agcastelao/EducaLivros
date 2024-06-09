@@ -13,7 +13,7 @@ import ResetPassword from './Components/Login/ResetPassword';
 import './App.css';
 
 function App() {
-  const isLoggedIn = !!localStorage.getItem('user');
+  const isLoggedIn = !!localStorage.getItem('isAuthenticated');
 
   return (
     <Router>
