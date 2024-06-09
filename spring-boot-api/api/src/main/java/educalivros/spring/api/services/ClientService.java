@@ -1,5 +1,6 @@
 package educalivros.spring.api.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -7,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import educalivros.spring.api.ValueObjects.V1.ClientVO;
-import educalivros.spring.api.ValueObjects.V2.ClientVO2;
+//import educalivros.spring.api.ValueObjects.V2.ClientVO2;
 import educalivros.spring.api.exceptions.ResourceNotFoundException;
 import educalivros.spring.api.mappers.Custom.ClientMapper;
 import educalivros.spring.api.mappers.dozer.DozerMapper;
 import educalivros.spring.api.models.Client;
+import educalivros.spring.api.models.Endereco;
 import educalivros.spring.api.repositories.ClientRepository;
+import educalivros.spring.api.repositories.EnderecoRepository;
 
 @Service
 public class ClientService {
@@ -25,22 +28,25 @@ public class ClientService {
     @Autowired
     ClientMapper cltmapper;
 
-    public List<ClientVO2> findAllClients(){
+    @Autowired
+    EnderecoRepository enderecoRepository;
+
+    public List<ClientVO> findAllClients(){
 
         logger.info("Finding all people");
-        List<Client> listaVO2 = repository.findAll();
-        return cltmapper.clientToClientVO2List(listaVO2);
-        //return DozerMapper.parseListObjects(repository.findAll(), ClientVO.class);
+        // List<Client> listaVO = repository.findAll();
+        // return cltmapper.clientToClientVO2List(listaVO);
+        return DozerMapper.parseListObjects(repository.findAll(), ClientVO.class);
     }
 
-    public ClientVO2 findByIdClient(Long id){
+    public ClientVO findByIdClient(Long id){
 
-        var entity = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID"));
-        var VO2 = cltmapper.clientToClientVO2mapper(entity);   
-        // var VO = DozerMapper.parseObjects(repository.findById(id) 
-        //      .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID")), ClientVO.class);
-        return VO2;      
+        // var entity = repository.findById(id)
+        //         .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID"));
+        // var VO2 = cltmapper.clientToClientVO2mapper(entity);   
+        var VO = DozerMapper.parseObjects(repository.findById(id) 
+             .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID")), ClientVO.class);
+        return VO;      
     }   
 
     public ClientVO createClient(ClientVO client) {
@@ -53,11 +59,27 @@ public class ClientService {
     }
 
     public ClientVO updateCLient(ClientVO client) {
-
+        
         logger.info("Updating one client");
         var entity = repository.findById(client.getId_cliente())
-                .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID"));
-
+                    .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID"));
+        
+        List<Endereco> listaEnderecos = new ArrayList<>();
+        
+        
+        if (!client.getEnderecos().isEmpty()) {
+            for (Endereco endereco : client.getEnderecos()) {
+                if (endereco.getId_endereco() == null) {          
+                    enderecoRepository.save(endereco);
+                }else{
+                    enderecoRepository.findById(endereco.getId_endereco()) 
+                                .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o id do endereço"));
+                }
+                listaEnderecos.add(endereco);
+            }
+        }
+        // var entity2 = DozerMapper.parseObjects(client, Client.class);
+        entity.setEnderecos(listaEnderecos);
         entity.setNome(client.getNome());
         entity.setSobrenome(client.getSobrenome());
         entity.setTelefone(client.getTelefone());

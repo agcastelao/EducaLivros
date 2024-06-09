@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import educalivros.spring.api.ValueObjects.V1.AutorVO;
+import educalivros.spring.api.ValueObjects.V1.ClientVO;
 import educalivros.spring.api.ValueObjects.V1.LivroVO;
 import educalivros.spring.api.services.AutorService;
+import educalivros.spring.api.services.ClientService;
+import educalivros.spring.api.services.EnderecoService;
 import educalivros.spring.api.services.LivroService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/test")
-public class LivroAndAutorTestController {
+@RequestMapping("/api")
+public class GeneralApiController {
 
     @Autowired
     AutorService autorService;
@@ -30,6 +33,11 @@ public class LivroAndAutorTestController {
     @Autowired
     LivroService livroService;
 
+    @Autowired
+    ClientService clientService;
+
+    @Autowired
+    EnderecoService enderecoService;
 
     @GetMapping(value = "/autor", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<AutorVO> getAllAutor() {
@@ -84,5 +92,37 @@ public class LivroAndAutorTestController {
         
        livroService.deleteLivro(id);
     }
+
+
+
+
+    @GetMapping(value = "/cliente", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public List<ClientVO> getAllClientes() {
+        
+        return clientService.findAllClients();
+    }
+    @GetMapping(value = "/cliente/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ClientVO getAllClientes(@PathVariable(value = "id")Long id) {
+        
+        return  clientService.findByIdClient(id);
+    }
+    @PostMapping(value = "/cliente", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ClientVO createLivro(@RequestBody ClientVO cliente) {
+        
+        return clientService.createClient(cliente);
+    }
+    @PutMapping(value = "/cliente", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ClientVO updateCliente(@RequestBody ClientVO cliente) {
+        
+        return clientService.updateCLient(cliente);
+    }
+    @DeleteMapping(value = "/cliente/{id}")
+    public void deleteCliente(@PathVariable(value = "id") Long id) {
+        
+       clientService.deleteClient(id);;
+    }
+
+
+    
 
 }

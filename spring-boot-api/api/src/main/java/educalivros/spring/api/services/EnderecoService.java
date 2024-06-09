@@ -1,15 +1,18 @@
 package educalivros.spring.api.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import educalivros.spring.api.repositories.ClientRepository;
 import educalivros.spring.api.repositories.EnderecoRepository;
 import educalivros.spring.api.ValueObjects.V1.EnderecoVO;
 import educalivros.spring.api.exceptions.ResourceNotFoundException;
 import educalivros.spring.api.mappers.dozer.DozerMapper;
+import educalivros.spring.api.models.Client;
 import educalivros.spring.api.models.Endereco;
 
 @Service
@@ -20,6 +23,9 @@ public class EnderecoService{
 
     @Autowired
     EnderecoRepository repository;
+
+    @Autowired
+    ClientRepository clientRepository;
 
     // @Autowired
     // EnderecoMapper cltmapper;
@@ -45,8 +51,30 @@ public class EnderecoService{
     public EnderecoVO createEndereco(EnderecoVO endereco) {
 
         logger.info("Creating one Endereco");
-        //var entity = cltmapper.EnderecoVO2ToEnderecoMapper(Endereco);
+        
+        List<Client> clientes = new ArrayList<>();
+
+        if (!endereco.getClientes().isEmpty()) {
+
+            for (Client client : endereco.getClientes()) {
+                if (client.getCpf() != null) {
+                    
+                    var foundedCliente = clientRepository.findByCpf(client.getCpf())
+                                .orElseThrow(() -> new ResourceNotFoundException("O CPF informado não está salvo"));
+                    clientes.add(foundedCliente);
+
+                }else throw new ResourceNotFoundException("O CPF do cliente não pode ser nulo.");
+            }
+        }
+        else throw new ResourceNotFoundException("Erro ao achar os clientes.");
+
         var entity = DozerMapper.parseObjects(endereco, Endereco.class);
+
+        entity.setClientes(clientes);
+        // entity.setCodigo_postal(endereco.getCodigo_postal());
+        // entity.setEstado(endereco.getEstado());
+        // entity.setRua_nome(endereco.getRua_nome());
+        // entity.setRua_complemento(endereco.getRua_complemento());
         var VO = DozerMapper.parseObjects(repository.save(entity), EnderecoVO.class);
         return VO;
     }
@@ -54,14 +82,29 @@ public class EnderecoService{
     public EnderecoVO updateEndereco(EnderecoVO endereco) {
 
         logger.info("Updating one Endereco");
-        var entity = repository.findById(endereco.getId_endereco())
-                .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID"));
+        List<Client> clientes = new ArrayList<>();
 
+        if (!endereco.getClientes().isEmpty()) {
+
+            for (Client client : endereco.getClientes()) {
+                if (client.getCpf() != null) {
+                    
+                    var foundedCliente = clientRepository.findByCpf(client.getCpf())
+                                .orElseThrow(() -> new ResourceNotFoundException("O CPF informado não está salvo"));
+                    clientes.add(foundedCliente);
+
+                }else throw new ResourceNotFoundException("O CPF do cliente não pode ser nulo.");
+            }
+        }
+        else throw new ResourceNotFoundException("Erro ao achar os clientes.");
+
+        var entity = DozerMapper.parseObjects(endereco, Endereco.class);
+
+        entity.setClientes(clientes);
         entity.setCodigo_postal(endereco.getCodigo_postal());
         entity.setEstado(endereco.getEstado());
         entity.setRua_nome(endereco.getRua_nome());
         entity.setRua_complemento(endereco.getRua_complemento());
-
         var VO = DozerMapper.parseObjects(repository.save(entity), EnderecoVO.class);
         return VO;
     }

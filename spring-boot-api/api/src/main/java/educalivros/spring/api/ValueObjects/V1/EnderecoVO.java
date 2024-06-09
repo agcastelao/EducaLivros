@@ -1,6 +1,9 @@
 package educalivros.spring.api.ValueObjects.V1;
 
 import java.io.Serializable;
+import java.util.List;
+
+import educalivros.spring.api.models.Client;
 
 public class EnderecoVO implements Serializable {
 
@@ -9,6 +12,8 @@ public class EnderecoVO implements Serializable {
     private String estado;
     private String rua_nome;
     private String rua_complemento;
+    private List<Client> clientes;
+
 
     public Long getId_endereco() {
         return id_endereco;
@@ -40,7 +45,12 @@ public class EnderecoVO implements Serializable {
     public void setRua_complemento(String rua_complemento) {
         this.rua_complemento = rua_complemento;
     }
-
+    public List<Client> getClientes() {
+        return clientes;
+    }
+    public void setClientes(List<Client> clientes) {
+        this.clientes = clientes;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -50,6 +60,7 @@ public class EnderecoVO implements Serializable {
         result = prime * result + ((estado == null) ? 0 : estado.hashCode());
         result = prime * result + ((rua_nome == null) ? 0 : rua_nome.hashCode());
         result = prime * result + ((rua_complemento == null) ? 0 : rua_complemento.hashCode());
+        result = prime * result + ((clientes == null) ? 0 : clientes.hashCode());
         return result;
     }
     @Override
@@ -86,9 +97,13 @@ public class EnderecoVO implements Serializable {
                 return false;
         } else if (!rua_complemento.equals(other.rua_complemento))
             return false;
+        if (clientes == null) {
+            if (other.clientes != null)
+                return false;
+        } else if (!clientes.equals(other.clientes))
+            return false;
         return true;
     }
-    
 
     
 }

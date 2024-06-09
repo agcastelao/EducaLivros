@@ -1,6 +1,9 @@
 package educalivros.spring.api.ValueObjects.V1;
 
 import java.io.Serializable;
+import java.util.List;
+
+import educalivros.spring.api.models.Endereco;
 
 public class ClientVO implements Serializable{
 
@@ -10,7 +13,8 @@ public class ClientVO implements Serializable{
     private String telefone;
     private String email;
     private String cpf;
-    
+    private List<Endereco> enderecos;
+
     public Long getId_cliente() {
         return id_cliente;
     }
@@ -47,6 +51,12 @@ public class ClientVO implements Serializable{
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -57,6 +67,7 @@ public class ClientVO implements Serializable{
         result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+        result = prime * result + ((enderecos == null) ? 0 : enderecos.hashCode());
         return result;
     }
     @Override
@@ -98,9 +109,12 @@ public class ClientVO implements Serializable{
                 return false;
         } else if (!cpf.equals(other.cpf))
             return false;
+        if (enderecos == null) {
+            if (other.enderecos != null)
+                return false;
+        } else if (!enderecos.equals(other.enderecos))
+            return false;
         return true;
     }
-
-    
 
 }
