@@ -1,7 +1,7 @@
 # EducaLivros
 ### Descrição do Projeto
 
-O projeto "EducaLivros" é uma aplicação web que visa gerenciar um sistema de vendas de livros e produtos de papelaria. A aplicação é construída utilizando o framework Spring Boot no backend e PostgreSQL como banco de dados. A aplicação é projetada para suportar operações CRUD (Create, Read, Update, Delete) para gerenciar entidades como usuários, clientes, livros, autores, carrinhos, pagamentos e endereços.
+O projeto "EducaLivros" é uma aplicação web que visa gerenciar um sistema de vendas de livros e produtos de papelaria. A aplicação é construída utilizando o framework Spring Boot no backend e PostgreSQL como banco de dados. A aplicação é projetada para suportar operações CRUD (Create, Read, Update, Delete) para gerenciar entidades como usuários, clientes, livros, autores, carrinhos, pagamentos e endereços. Além disso, foram criadas funções, stored procedures e triggers em sql para facilitar o desenvolvimento do projeto.
 
 #### Funcionalidades Principais
 
@@ -13,13 +13,8 @@ O projeto "EducaLivros" é uma aplicação web que visa gerenciar um sistema de 
    - **Carrinhos e Pagamentos:** Gerenciamento de carrinhos de compras e registros de pagamentos.
 
 2. **Autenticação e Autorização:**
-   - Implementação de segurança utilizando Spring Security e JWT (JSON Web Token) para autenticação e autorização. Apenas usuários autenticados podem acessar recursos protegidos.
 
-3. **Views:**
-   
-
-4. **Triggers:**
-  
+3. **Segurança:**
 
 #### Estrutura do Projeto
 
@@ -42,6 +37,33 @@ O projeto "EducaLivros" é uma aplicação web que visa gerenciar um sistema de 
 5. **Security:**
    - Configuração de segurança para autenticação e autorização.
    - Exemplo: `SecurityConfigurations` para definir regras de segurança e gerenciamento de tokens JWT.
+  
+#### Triggers
+
+1. **Auditorias:**
+   - Foram criados como trigger dois esquemas de auditoria. Auditorias são tabelas que armazenam alterações feitas em outras tabelas através de triggers. As alterações são de update, create e delete.
+   - Foram criados nesse esquema as tabelas livro_audit e autor_audit.
+
+### Normalização
+
+1. **O que é a normalização?**
+  - A normalização é o processo de organização dos dados em um banco de dados para reduzir a redundância e melhorar a integridade dos dados. A 3ª Forma Normal (3NF) é uma das formas mais comuns de normalização e tem como objetivo eliminar dependências transitivas.
+
+   Para que uma tabela esteja na 3ª Forma Normal, ela deve:
+   - Estar na 2ª Forma Normal (2NF): Todos os atributos não-chave devem ser totalmente dependentes da chave primária.
+   - Eliminar Dependências Transitivas: Nenhum atributo não-chave deve depender de outro atributo não-chave.
+   - Aplicação da 3ª Forma Normal às Tabelas
+   - Vamos associar as tabelas fornecidas e adicionar algumas suposições para demonstrar como elas poderiam ser normalizadas em 3NF.
+
+2. **Tabelas Originais:**
+   - autor (nome_autor, sobrenome_autor)
+   - carrinho (quantidade_produto)
+   - cliente (nome, sobrenome, telefone, email, cpf)
+   - endereco (codigo_postal, estado, rua_nome, rua_complemento)
+   - livro (descricao_livro, estoque_produto, nome_livro, avaliacao, data_publicacao)
+   - pagamento (forma_pagamento, data_pagamento, pagamento_valido)
+   - papelaria (tipo, marca, nome_produto, estoque_papelaria)
+   - pedido (valor_total, data_pedido)
 
 #### Resumo do Projeto
 
