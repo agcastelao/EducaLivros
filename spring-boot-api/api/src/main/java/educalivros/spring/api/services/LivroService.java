@@ -107,6 +107,12 @@ public class LivroService {
         logger.info("Deleting one Livro");
         var entity = livroRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID"));
+        
+        entity.getAutors().forEach(autor ->{
+            autor.getLivros().remove(entity);
+            autorRepository.save(autor);
+        });
+
         livroRepository.delete(entity);
     }
 }

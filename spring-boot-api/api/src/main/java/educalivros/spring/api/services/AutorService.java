@@ -81,7 +81,7 @@ public class AutorService {
     public AutorVO updateAutor(AutorVO autor) {
 
         logger.info("Updating one Autor");
-        if (autor.getLivros() != null && !autor.getLivros().isEmpty()) {
+        if (!autor.getLivros().isEmpty()) {
 
             List<Livro> livros = new ArrayList<>();
             for (Livro livro : autor.getLivros()) {
@@ -93,7 +93,7 @@ public class AutorService {
             }
 
             var autorFinded = repository.findById(autor.getId_autor()) 
-                        .orElseThrow(() -> new ResourceNotFoundException("Livro não encontrado"));
+                        .orElseThrow(() -> new ResourceNotFoundException("Autor não encontrado"));
             autorFinded.setLivros(livros);
             autorFinded.setNome_autor(autor.getNome_autor());
             autorFinded.setSobrenome_autor(autor.getSobrenome_autor());
@@ -119,36 +119,13 @@ public class AutorService {
         logger.info("Deleting one Autor");
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID"));
+
+        entity.getLivros().forEach(livro->{
+            livro.getAutors().remove(entity);
+            livroRepository.save(livro);
+        });
         repository.delete(entity);
 
     }
 
-    public List<Livro> validateLivrosInAutor(AutorVO autor) {
-
-        List<Livro> livros = new ArrayList<>();
-        if (autor.getLivros() != null && !autor.getLivros().isEmpty()) {
-
-            for (Livro livro : autor.getLivros()) {
-
-                var entity = livroRepository.findById(livro.getId_livro()) 
-                            .orElseThrow(() -> new ResourceNotFoundException("id nao encontrado"));
-
-                livros.add(entity);
-            }
-            
-        }
-            return livros;
-                // try{
-                //     var entity = livroRepository.findById(livro.getId_livro());
-                //     if (entity.isPresent()) {
-                        
-                //         livros.add(entity.get());
-                //     }
-
-                // } catch (IllegalArgumentException iae){
-                //     System.out.println("Erro ao achar o ID dos autores");
-                // }
-
-
-    }
 }

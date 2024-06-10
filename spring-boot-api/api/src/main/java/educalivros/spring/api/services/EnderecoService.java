@@ -114,6 +114,12 @@ public class EnderecoService{
         logger.info("Deleting one Endereco");
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Erro ao achar o ID"));
+        
+        entity.getClientes().forEach(cliente -> {
+            cliente.getEnderecos().remove(entity);
+            clientRepository.save(cliente);
+        });
+        
         repository.delete(entity);
 
     }
