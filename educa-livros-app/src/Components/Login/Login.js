@@ -15,8 +15,6 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = {
-       //const login = e.target.typeUsernameX.value;
-      //const senha = e.target.typerPasswordX.value;
       login,
       senha
     };
@@ -24,6 +22,7 @@ function Login() {
     try {
       const response = await api.post('/auth/login', userData);
       if (response.status === 200) {
+        setErrorMessage(''); 
         setSuccessMessage('Login sucedido!');
         localStorage.setItem('user', login);
         localStorage.setItem('accessToken', response.data.token);
@@ -33,10 +32,12 @@ function Login() {
           window.location.reload();
         }, 2000);
       } else {
-        setErrorMessage('Login ou senha incorretos');
+        setSuccessMessage(''); 
+        setErrorMessage('Usuário ou senha incorretos');
       }
     } catch (error) {
-      setErrorMessage('Login ou senha incorretos');
+      setSuccessMessage(''); 
+      setErrorMessage('Usuário ou senha incorretos');
     }
   };
 
